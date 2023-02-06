@@ -40,7 +40,7 @@ public class UserController {
 
 				Users users2 = this.service.Register(users);
 
-				return new ResponseEntity<>(new Success("Success", "success", users2), HttpStatus.CREATED);
+				return new ResponseEntity<>(new Success("Success", "success", users2), HttpStatus.OK);
 
 			} else {
 

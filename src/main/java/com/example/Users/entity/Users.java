@@ -48,6 +48,10 @@ public class Users implements UserDetails {
 	@JsonIgnore
 	private List<UsersTaskEntity> task;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users")
+	@JsonIgnore
+	private List<UserRoleEntity> role;
+
 	public int getId() {
 		return id;
 	}
