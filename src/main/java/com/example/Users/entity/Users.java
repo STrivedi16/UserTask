@@ -44,6 +44,8 @@ public class Users implements UserDetails {
 	@UpdateTimestamp
 	private Timestamp updationtime;
 
+	private boolean is_active = true;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	@JsonIgnore
 	private List<UsersTaskEntity> task;
@@ -51,6 +53,22 @@ public class Users implements UserDetails {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users")
 	@JsonIgnore
 	private List<UserRoleEntity> role;
+
+	public boolean isIs_active() {
+		return is_active;
+	}
+
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+
+	public List<UserRoleEntity> getRole() {
+		return role;
+	}
+
+	public void setRole(List<UserRoleEntity> role) {
+		this.role = role;
+	}
 
 	public int getId() {
 		return id;
@@ -106,6 +124,22 @@ public class Users implements UserDetails {
 
 	public void setCreationtime(Timestamp creationtime) {
 		Creationtime = creationtime;
+	}
+
+	public Users(int id, String name, String add, String city, String email, String password, Timestamp creationtime,
+			Timestamp updationtime, boolean is_active, List<UsersTaskEntity> task, List<UserRoleEntity> role) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.add = add;
+		this.city = city;
+		this.email = email;
+		this.password = password;
+		Creationtime = creationtime;
+		this.updationtime = updationtime;
+		this.is_active = is_active;
+		this.task = task;
+		this.role = role;
 	}
 
 	public Timestamp getUpdationtime() {

@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.Success;
-import com.example.Users.Service.TasksService;
-import com.example.Users.entity.Tasks;
+import com.example.Users.Service.PermisionService;
+import com.example.Users.entity.Permissions;
 
 @RestController
-public class TaskController {
+public class PermissionController {
 
 	@Autowired
-	private TasksService service;
+	private PermisionService service;
 
-	@PostMapping("/task")
-	@PreAuthorize("hasAuthority('setTask')")
-	public ResponseEntity<?> settask(@RequestBody Tasks tasks) {
+	@PostMapping("/permission")
+	@PreAuthorize("hasAuthority	('addPermission')")
+	public ResponseEntity<?> Setpermission(@RequestBody Permissions permissions) {
 		try {
 
-			Tasks tasks2 = this.service.setTask(tasks);
+			Permissions permissions2 = this.service.SetPermission(permissions);
 
-			return new ResponseEntity<>(new Success("Sucess", "Success", tasks2), HttpStatus.OK);
+			return new ResponseEntity<>(new Success("success", "Success", permissions2), HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in Storing task", "Error"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage("Error in set permission", "Error"), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

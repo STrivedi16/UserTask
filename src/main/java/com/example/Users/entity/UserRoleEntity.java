@@ -4,22 +4,29 @@ import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class UserRoleEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Users users;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Roles roles;
 
 	@CreationTimestamp

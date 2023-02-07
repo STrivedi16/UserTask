@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +52,17 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ErrorMessage("Error in Creation", "Error"), HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
+
+	@GetMapping("/user/{id}")
+	public ResponseEntity<?> getdata(@PathVariable("id") int id) {
+		try {
+			Users users = this.service.getbyid(id);
+
+			return new ResponseEntity<>(new Success("Success", "Success", users), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("User id is not Fund", "Not Found"), HttpStatus.NOT_FOUND);
 		}
 	}
 

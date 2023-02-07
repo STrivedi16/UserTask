@@ -3,6 +3,9 @@ package com.example.Users.Contoller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +23,8 @@ public class UsertaskController {
 	private UserTaskService taskService;
 
 	@PostMapping("/usertask")
+	@PreAuthorize("hasAuthority('AssignTask')")
 	public ResponseEntity<?> assigntask(@RequestBody UsertaskDTO dto) {
-		System.out.println(dto.getTaskid() + dto.getUserid());
 
 		try {
 
@@ -32,6 +35,23 @@ public class UsertaskController {
 		} catch (Exception e) {
 
 			return new ResponseEntity<>(new ErrorMessage("Something wrong , You can not assign task to user", "Error"),
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PatchMapping("/updatestatus/{id}")
+	@PreAuthorize("hasAuthority('UpdateStatus')")
+	public ResponseEntity<?> UpdateUserTaskStatus(@PathVariable("id") int id, @RequestBody UsertaskDTO dto) {
+		System.err.println(dto.getStatus());
+		try {
+
+			UsersTaskEntity entity = this.taskService.updatestatus(id, dto);
+
+			return new ResponseEntity<>(new Success("Success", "Success", entity), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(new ErrorMessage("You Cant chang status of Working status", "Error"),
 					HttpStatus.BAD_REQUEST);
 		}
 	}

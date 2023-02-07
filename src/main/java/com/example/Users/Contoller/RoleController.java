@@ -3,6 +3,7 @@ package com.example.Users.Contoller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class RoleController {
 	private RoleService roleService;
 
 	@PostMapping("/role")
+	@PreAuthorize("hasAuthority	('setRole')")
 	public ResponseEntity<?> setroles(@RequestBody Roles roles) {
 		try {
 			Roles roles2 = this.roleService.setrole(roles);

@@ -15,7 +15,7 @@ import com.example.Users.entity.UsertaskDTO;
 public class UserTaskService {
 
 	@Autowired
-	private UserTaskRepo taskRepo;
+	private UserTaskRepo userTaskRepo;
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -34,6 +34,17 @@ public class UserTaskService {
 
 		entity.setTasks(tasks);
 
-		return this.taskRepo.save(entity);
+		entity.setStatus(dto.getStatus());
+
+		return this.userTaskRepo.save(entity);
 	}
+
+	public UsersTaskEntity updatestatus(int id, UsertaskDTO dto) throws Exception {
+
+		UsersTaskEntity entity = this.userTaskRepo.findById(id).orElseThrow(() -> new Exception("Data not get"));
+		entity.setStatus(dto.getStatus());
+		return this.userTaskRepo.save(entity);
+
+	}
+
 }
