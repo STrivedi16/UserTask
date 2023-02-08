@@ -35,18 +35,38 @@ public class JwtController {
 
 	@RequestMapping(value = "/token", method = RequestMethod.POST)
 	public ResponseEntity<?> generatetoken(@RequestBody JwtRequest jwtRequest) {
-		System.out.println(jwtRequest);
+		System.err.println(jwtRequest.getUsername());
 
-		try {
+		if (jwtRequest.getUsername().isEmpty() || jwtRequest.getPassword().isEmpty()) {
+			if (jwtRequest.getUsername().isEmpty() && jwtRequest.getPassword().isEmpty() == false) {
 
-			this.authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
+				return new ResponseEntity<>(
+						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						HttpStatus.BAD_REQUEST);
+			} else if (jwtRequest.getPassword().isEmpty() && jwtRequest.getUsername().isEmpty() == false) {
+				return new ResponseEntity<>(
+						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						HttpStatus.BAD_REQUEST);
+			} else {
+				return new ResponseEntity<>(
+						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						HttpStatus.BAD_REQUEST);
+			}
 
-		} catch (Exception e) {
+		} else {
 
-			return new ResponseEntity<>(new ErrorMessage("Bad Credintial", "Please enter Valid username and password"),
-					HttpStatus.NOT_ACCEPTABLE);
+			try {
 
+				this.authenticationManager.authenticate(
+						new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
+
+			} catch (Exception e) {
+
+				return new ResponseEntity<>(
+						new ErrorMessage("Bad Credintial", "Please enter Valid username and password"),
+						HttpStatus.BAD_REQUEST);
+
+			}
 		}
 
 		UserDetails details = this.customerUserdetailsService.loadUserByUsername(jwtRequest.getUsername());

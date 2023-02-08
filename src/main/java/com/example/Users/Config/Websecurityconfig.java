@@ -19,7 +19,7 @@ import com.example.Users.Service.CustomerUserdetailsService;
 @Configuration // TO GENERATE BEAN AND WHILE EXCUTION TO ADD BEAN
 @EnableWebSecurity // TO PROVIDE A SECURUTY
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class Websecurityconfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private CustomerUserdetailsService customerUserdetailsService;

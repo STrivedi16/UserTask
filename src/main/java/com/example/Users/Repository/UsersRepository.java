@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.Users.Interface.UsersPermission;
+import com.example.Users.Interface.UsersTask;
 import com.example.Users.entity.Users;
 
 @Repository
@@ -21,4 +22,10 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 			+ "join permissions p on p.id= rpe.permissions_id where u.id= :idnumber", nativeQuery = true)
 	List<UsersPermission> findById(@Param("idnumber") int id, Class<UsersPermission> class1);
 
+//	List<Users> findById(int id);
+
+	@Query(value = "select u.name , u.id, t.task, ute.status from users u \r\n"
+			+ "join users_task_entity ute on u.id= ute.user_id\r\n"
+			+ "join tasks t on ute.tasks_id=t.id  where u.id= :numberid", nativeQuery = true)
+	List<UsersTask> findByid(@Param("numberid") int id, Class<UsersTask> class1);
 }

@@ -8,6 +8,26 @@ public class UserTaskStatusDTO {
 
 	private Status status;
 
+	private Integer rating;
+
+	private String rateby;
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	public String getRateby() {
+		return rateby;
+	}
+
+	public void setRateby(String rateby) {
+		this.rateby = rateby;
+	}
+
 	public Integer getUserid() {
 		return userid;
 	}
@@ -24,11 +44,13 @@ public class UserTaskStatusDTO {
 		this.taskid = taskid;
 	}
 
-	public UserTaskStatusDTO(Integer userid, Integer taskid, Status status) {
+	public UserTaskStatusDTO(Integer userid, Integer taskid, Status status, Integer rating, String rateby) {
 		super();
 		this.userid = userid;
 		this.taskid = taskid;
 		this.status = status;
+		this.rating = rating;
+		this.rateby = rateby;
 	}
 
 	public Status getStatus() {

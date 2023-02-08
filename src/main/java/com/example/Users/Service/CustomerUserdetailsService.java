@@ -25,19 +25,27 @@ public class CustomerUserdetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		try {
+		System.err.println(username.isEmpty());
 
-			Users users = this.repository.findByEmailIgnoreCase(username);
+		if (username.isEmpty()) {
+			throw new NullPointerException();
+		} else {
 
-			ArrayList<SimpleGrantedAuthority> arrayList = this.service.getAuthorities(users.getId());
+			try {
 
-			System.out.println("All permissions" + arrayList);
+				Users users = this.repository.findByEmailIgnoreCase(username);
 
-			return new User(users.getEmail(), users.getPassword(), arrayList);
+				ArrayList<SimpleGrantedAuthority> arrayList = this.service.getAuthorities(users.getId());
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new UsernameNotFoundException("User not Found or invlid email");
+				System.out.println("All permissions" + arrayList);
+
+				return new User(users.getEmail(), users.getPassword(), arrayList);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new UsernameNotFoundException("User not Found or invlid email");
+			}
+
 		}
 
 	}

@@ -42,9 +42,25 @@ public class UserTaskService {
 	public UsersTaskEntity updatestatus(int id, UsertaskDTO dto) throws Exception {
 
 		UsersTaskEntity entity = this.userTaskRepo.findById(id).orElseThrow(() -> new Exception("Data not get"));
+
 		entity.setStatus(dto.getStatus());
+
 		return this.userTaskRepo.save(entity);
 
 	}
+
+//	public UsersTaskEntity Giverating(int id, UserTaskStatusDTO dto) throws Exception {
+//
+//		UsersTaskEntity entity = this.userTaskRepo.findById(id).orElseThrow(() -> new Exception("Data Not Get"));
+//
+//		if (entity.getStatus().equals(Status.DONE)) {
+//			entity.setRating(dto.getRating());
+//			entity.setRatedby(dto.getRateby());
+//
+//			return this.userTaskRepo.save(entity);
+//		}
+//		throw new Exception("No Data Found");
+//
+//	}
 
 }

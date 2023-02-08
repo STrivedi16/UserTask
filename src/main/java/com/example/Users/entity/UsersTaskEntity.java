@@ -1,5 +1,6 @@
 package com.example.Users.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +30,18 @@ public class UsersTaskEntity {
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usertask")
+	@JsonIgnore
+	private UserTaskRatingEntity rating;
+
+	public UserTaskRatingEntity getRating() {
+		return rating;
+	}
+
+	public void setRating(UserTaskRatingEntity rating) {
+		this.rating = rating;
+	}
 
 	public int getId() {
 		return id;

@@ -33,6 +33,8 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Autowired
 	private CustomerUserdetailsService customerUserdetailsService;
 
+	public static int id = 0;
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -43,8 +45,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		String username = null;
 		String type = null;
-
-		int id = 0;
 
 		if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
 			jwttoken = requestHeader.substring(7);

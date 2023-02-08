@@ -17,7 +17,7 @@ import com.example.Users.entity.UsersTaskEntity;
 import com.example.Users.entity.UsertaskDTO;
 
 @RestController
-public class UsertaskController {
+public class UserTaskController {
 
 	@Autowired
 	private UserTaskService taskService;
@@ -55,4 +55,19 @@ public class UsertaskController {
 					HttpStatus.BAD_REQUEST);
 		}
 	}
+
+//	@PatchMapping("/rating/{id}")
+//	@PreAuthorize("hasAuthority('GiveRating')")
+//	public ResponseEntity<?> giverating(@PathVariable("id") int id, @RequestBody UserTaskStatusDTO dto) {
+//		System.err.println(dto.getRateby() + " " + dto.getRating());
+//		try {
+//
+//			UsersTaskEntity entity = this.taskService.Giverating(id, dto);
+//
+//			return new ResponseEntity<>(new Success("Success", "Success", entity), HttpStatus.OK);
+//
+//		} catch (Exception e) {
+//			return new ResponseEntity<>(new ErrorMessage("Task is pending", "Task is pending"), HttpStatus.BAD_REQUEST);
+//		}
+//	}
 }

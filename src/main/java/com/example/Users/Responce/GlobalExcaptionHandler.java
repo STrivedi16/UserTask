@@ -1,12 +1,18 @@
 package com.example.Users.Responce;
 
+import java.util.NoSuchElementException;
+
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
-public class GlobalExcaptionHandler {
+public class GlobalExcaptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ApiResponce> resourceNotFound(ResourceNotFoundException exception) {
@@ -14,4 +20,24 @@ public class GlobalExcaptionHandler {
 		ApiResponce apiResponce = new ApiResponce(message, false);
 		return new ResponseEntity<ApiResponce>(apiResponce, HttpStatus.NOT_FOUND);
 	}
+
+	@Override
+	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		return new ResponseEntity<Object>(
+				new ErrorMessage("Please change the http method ", "Http Method Is Not Applied"), HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	public ResponseEntity<?> HandleNosuchElements(NoSuchElementException elementException) {
+		return new ResponseEntity<>(new ErrorMessage("Something wrong no value is get ", "Error"),
+				HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<?> Handlenullpointer(NullPointerException exception) {
+		return new ResponseEntity<>(new ErrorMessage("Null pointer ", "Error"), HttpStatus.BAD_REQUEST);
+	}
+
 }
