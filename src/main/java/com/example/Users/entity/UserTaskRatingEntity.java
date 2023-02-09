@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserTaskRatingEntity {
 
 	@Id
+
 	private int id;
 
 	private String message;
@@ -23,7 +25,7 @@ public class UserTaskRatingEntity {
 
 	private String ratedby;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private UsersTaskEntity usertask;
 

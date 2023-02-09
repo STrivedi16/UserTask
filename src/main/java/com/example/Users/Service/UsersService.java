@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersPermission;
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Repository.UsersRepository;
@@ -35,10 +36,8 @@ public class UsersService {
 
 			List<UsersPermission> list = this.repository.findById(id, UsersPermission.class);
 
-			System.out.println(list);
-
 			list.forEach(e -> {
-				System.out.println(e);
+
 				auth1.add(new SimpleGrantedAuthority(e.getPermissions()));
 			});
 
@@ -61,6 +60,14 @@ public class UsersService {
 
 	public List<UsersTask> showusertask(int id) {
 		return this.repository.findByid(id, UsersTask.class);
+	}
+
+	public List<UserTaskReview> showtaskreview(int id) {
+		return this.repository.findByID(id, UserTaskReview.class);
+	}
+
+	public List<UserTaskReview> showtaskreviewFORADMIN(int id) {
+		return this.repository.findByID(id, UserTaskReview.class);
 	}
 
 }

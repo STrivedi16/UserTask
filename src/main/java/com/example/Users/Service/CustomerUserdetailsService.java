@@ -25,8 +25,6 @@ public class CustomerUserdetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.err.println(username.isEmpty());
-
 		if (username.isEmpty()) {
 			throw new NullPointerException();
 		} else {

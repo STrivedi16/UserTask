@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Users.Repository.UserTaskRatingRepository;
+import com.example.Users.Repository.UserTaskRepo;
 import com.example.Users.entity.Status;
+import com.example.Users.entity.UserRatingDTO;
 import com.example.Users.entity.UserTaskRatingEntity;
 import com.example.Users.entity.UsersTaskEntity;
 
@@ -14,18 +16,27 @@ public class UserTaskRatingService {
 	@Autowired
 	private UserTaskRatingRepository ratingRepository;
 
-	private UsersTaskEntity taskEntity;
+	@Autowired
+	private UserTaskRepo repo;
 
-	public UserTaskRatingEntity setrating(UserTaskRatingEntity entity) throws Exception {
+	public UserTaskRatingEntity setrating(UserRatingDTO dto) throws Exception {
 
-		System.err.println(entity.getUsertask().getStatus());
+		UserTaskRatingEntity entities = new UserTaskRatingEntity();
 
-		if (taskEntity.getStatus().equals(Status.DONE)) {
+		UsersTaskEntity entity2 = this.repo.findById(dto.getTask())
+				.orElseThrow(() -> new Exception("Error in Storing value"));
 
-			return this.ratingRepository.save(entity);
+		if (entity2.getStatus().equals(Status.DONE)) {
+			entities.setId(dto.getId());
+			entities.setMessage(dto.getMesssage());
+			entities.setRating(dto.getRating());
+			entities.setUsertask(entity2);
+			entities.setRatedby(dto.getRatedby());
+			return this.ratingRepository.save(entities);
 		}
 
-		throw new Exception("Not Stord  in ");
+		throw new Exception("Error in String rating");
+
 	}
 
 }

@@ -52,19 +52,14 @@ public class JwtFilter extends OncePerRequestFilter {
 			try {
 				type = this.jwtTokenUtil.getTypeFromToken(jwttoken);
 
-				System.out.println(type);
-
 				if (type.equals("Access")) {
 
 					username = this.jwtTokenUtil.getUsernameFromToken(jwttoken);
-
-					System.err.println(username);
 
 					Users employee = this.repository.findByEmailIgnoreCase(username);
 
 					id = employee.getId();
 
-					System.err.println(id);
 				} else {
 					System.out.println("Error");
 				}
@@ -87,7 +82,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 			// GET USER DETAILS OF USER
 			UserDetails details = this.customerUserdetailsService.loadUserByUsername(username);
-			System.err.println("This is authorities" + details.getAuthorities());
+			// System.err.println("This is authorities" + details.getAuthorities());
 			UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(details, null,
 					details.getAuthorities());
 

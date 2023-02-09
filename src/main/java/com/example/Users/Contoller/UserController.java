@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Config.JwtFilter;
+import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ResourceNotFoundException;
@@ -142,4 +143,36 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("/review/{id}")
+	public ResponseEntity<?> showtaskreview(@PathVariable("id") int id) {
+		try {
+
+			if (id == filter.id) {
+				List<UserTaskReview> review = this.service.showtaskreview(id);
+
+				return new ResponseEntity<>(new Success("Success", "Success", review), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(new ErrorMessage("You Don't have a Access to show Other review", "Error"),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"),
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@GetMapping("/reviews/{id}")
+	@PreAuthorize("hasAuthority('showReview')")
+	public ResponseEntity<?> ShowAdminreview(@PathVariable("id") int id) {
+		try {
+
+			List<UserTaskReview> list = this.service.showtaskreviewFORADMIN(id);
+
+			return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"),
+					HttpStatus.BAD_REQUEST);
+		}
+	}
 }

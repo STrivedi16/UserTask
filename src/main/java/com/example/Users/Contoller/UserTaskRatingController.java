@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.Success;
 import com.example.Users.Service.UserTaskRatingService;
+import com.example.Users.entity.UserRatingDTO;
 import com.example.Users.entity.UserTaskRatingEntity;
 
 @RestController
@@ -21,19 +22,21 @@ public class UserTaskRatingController {
 
 	@PostMapping("/rating")
 	@PreAuthorize("hasAuthority('GiveRating')")
-	public ResponseEntity<?> setRating(@RequestBody UserTaskRatingEntity entity) {
+	public ResponseEntity<?> setRating(@RequestBody UserRatingDTO dto) {
 		try {
 
-			System.err.println(entity.getUsertask().getStatus());
+			System.err.println(dto.getTask());
+			System.err.println(dto.getMesssage() + " " + dto.getRating() + " " + dto.getRatedby() + " " + dto.getId()
+					+ " " + dto.getTask());
 
-			UserTaskRatingEntity entity2 = this.ratingService.setrating(entity);
+			UserTaskRatingEntity entity2 = this.ratingService.setrating(dto);
 
 			return new ResponseEntity<>(new Success("Success", "Success", entity2), HttpStatus.OK);
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage("Error in storing Review", "Review Not Stored"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage("You can't Give Reivew it may not  Completed or not get ",
+					"Task not Completed or not Assign"), HttpStatus.BAD_REQUEST);
 		}
 	}
 

@@ -54,6 +54,10 @@ public class Users implements UserDetails {
 	@JsonIgnore
 	private List<UserRoleEntity> role;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users1")
+	@JsonIgnore
+	private List<QueryPortal> qury;
+
 	public boolean isIs_active() {
 		return is_active;
 	}

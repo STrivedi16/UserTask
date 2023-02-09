@@ -8,4 +8,6 @@ import com.example.Users.entity.UsersTaskEntity;
 @Repository
 public interface UserTaskRepo extends JpaRepository<UsersTaskEntity, Integer> {
 
+	UsersTaskEntity findById(UsersTaskEntity usertask);
+
 }
