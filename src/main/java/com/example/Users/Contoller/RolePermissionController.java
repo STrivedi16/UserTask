@@ -20,7 +20,7 @@ public class RolePermissionController {
 	private RolePermissionService rolePermissionService;
 
 	@PostMapping("/rolepermission")
-	public ResponseEntity<?> setrolepermission(@RequestBody RolePermissionDTO dto) {
+	public ResponseEntity<?> setRolePermission(@RequestBody RolePermissionDTO dto) {
 		System.out.println(dto.getPermissionid() + "" + dto.getRoleid());
 
 		try {

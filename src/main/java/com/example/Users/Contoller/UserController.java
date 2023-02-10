@@ -32,7 +32,7 @@ public class UserController {
 	JwtFilter filter = new JwtFilter();
 
 	@PostMapping("/register")
-	public ResponseEntity<?> setusers(@RequestBody Users users) {
+	public ResponseEntity<?> setUsers(@RequestBody Users users) {
 
 		if (users.getName().isEmpty() == false && users.getEmail().isEmpty() == false
 				&& users.getPassword().isEmpty() == false) {
@@ -51,7 +51,7 @@ public class UserController {
 
 				if (matcher.matches()) {
 
-					Users users2 = this.service.Register(users);
+					Users users2 = this.service.register(users);
 
 					return new ResponseEntity<>(new Success("Success", "success", users2), HttpStatus.OK);
 
@@ -72,11 +72,11 @@ public class UserController {
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<?> getdata(@PathVariable("id") int id) throws Exception {
+	public ResponseEntity<?> getData(@PathVariable("id") int id) throws Exception {
 		try {
 
 			if (id == filter.id) {
-				Users users = this.service.getbyid(id);
+				Users users = this.service.getById(id);
 				return new ResponseEntity<>(new Success("Success", "Success", users), HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(new ErrorMessage("You Can not access Other Account details", "Not Access"),
@@ -88,12 +88,12 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/getall")
+	@GetMapping("/useres")
 	@PreAuthorize("hasAuthority('getusers')")
-	public ResponseEntity<?> getalldata() {
+	public ResponseEntity<?> getAllData() {
 		try {
 
-			List<Users> list = this.service.getall();
+			List<Users> list = this.service.getAll();
 
 			return new ResponseEntity<>(new Success("Succcess", "Success", list), HttpStatus.OK);
 
@@ -105,10 +105,10 @@ public class UserController {
 
 	@GetMapping("/usertask/{id}")
 	@PreAuthorize("hasAuthority('ShowTask')")
-	public ResponseEntity<?> getusertask(@PathVariable("id") int id) {
+	public ResponseEntity<?> getUserTask(@PathVariable("id") int id) {
 		try {
 
-			List<UsersTask> list = this.service.getusertask(id);
+			List<UsersTask> list = this.service.getUserTask(id);
 
 			return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
 
@@ -120,12 +120,12 @@ public class UserController {
 	}
 
 	@GetMapping("/mytask/{id}")
-	public ResponseEntity<?> showusertask(@PathVariable("id") int id) {
+	public ResponseEntity<?> showUserTask(@PathVariable("id") int id) {
 		try {
 
 			if (id == filter.id) {
 
-				List<UsersTask> list = this.service.getusertask(id);
+				List<UsersTask> list = this.service.getUserTask(id);
 
 				return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
 
@@ -144,11 +144,11 @@ public class UserController {
 	}
 
 	@GetMapping("/review/{id}")
-	public ResponseEntity<?> showtaskreview(@PathVariable("id") int id) {
+	public ResponseEntity<?> showTaskReview(@PathVariable("id") int id) {
 		try {
 
 			if (id == filter.id) {
-				List<UserTaskReview> review = this.service.showtaskreview(id);
+				List<UserTaskReview> review = this.service.showTaskReview(id);
 
 				return new ResponseEntity<>(new Success("Success", "Success", review), HttpStatus.OK);
 			} else {
@@ -157,22 +157,20 @@ public class UserController {
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"), HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@GetMapping("/reviews/{id}")
 	@PreAuthorize("hasAuthority('showReview')")
-	public ResponseEntity<?> ShowAdminreview(@PathVariable("id") int id) {
+	public ResponseEntity<?> showAdminReview(@PathVariable("id") int id) {
 		try {
 
-			List<UserTaskReview> list = this.service.showtaskreviewFORADMIN(id);
+			List<UserTaskReview> list = this.service.showTaskReviewFORADMIN(id);
 
 			return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"), HttpStatus.NOT_FOUND);
 		}
 	}
 }

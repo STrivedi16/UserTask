@@ -24,7 +24,7 @@ public class UserTaskController {
 
 	@PostMapping("/usertask")
 	@PreAuthorize("hasAuthority('AssignTask')")
-	public ResponseEntity<?> assigntask(@RequestBody UsertaskDTO dto) {
+	public ResponseEntity<?> assignTask(@RequestBody UsertaskDTO dto) {
 
 		try {
 
@@ -41,7 +41,7 @@ public class UserTaskController {
 
 	@PatchMapping("/updatestatus/{id}")
 	@PreAuthorize("hasAuthority('UpdateStatus')")
-	public ResponseEntity<?> UpdateUserTaskStatus(@PathVariable("id") int id, @RequestBody UsertaskDTO dto) {
+	public ResponseEntity<?> updateUserTaskStatus(@PathVariable("id") int id, @RequestBody UsertaskDTO dto) {
 		System.err.println(dto.getStatus());
 		try {
 

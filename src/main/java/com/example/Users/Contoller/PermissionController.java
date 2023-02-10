@@ -21,7 +21,7 @@ public class PermissionController {
 
 	@PostMapping("/permission")
 	@PreAuthorize("hasAuthority	('addPermission')")
-	public ResponseEntity<?> Setpermission(@RequestBody Permissions permissions) {
+	public ResponseEntity<?> setPermission(@RequestBody Permissions permissions) {
 		try {
 
 			Permissions permissions2 = this.service.SetPermission(permissions);

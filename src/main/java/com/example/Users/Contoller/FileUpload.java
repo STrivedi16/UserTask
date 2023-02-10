@@ -18,7 +18,7 @@ public class FileUpload {
 	private FileHandleHelper fileHandleHelper;
 
 	@PostMapping("/upload-file")
-	public ResponseEntity<?> uploadfile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
 
 		try {
 
@@ -35,7 +35,12 @@ public class FileUpload {
 			Boolean f = this.fileHandleHelper.uploadFile(file);
 
 			if (f == true) {
-				return ResponseEntity.ok("Working");
+
+//				return new ResponseEntity<>(new Success("Success", "Success", ServletUriComponentsBuilder
+//						.fromCurrentContextPath().path("/Images/").path(file.getOriginalFilename().toString())),
+//						HttpStatus.OK);
+				return ResponseEntity.ok("File Srored in your folder");
+
 			} else {
 				throw new Exception("Not upload exception");
 			}

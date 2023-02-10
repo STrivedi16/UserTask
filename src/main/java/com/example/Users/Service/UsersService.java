@@ -19,11 +19,11 @@ public class UsersService {
 	@Autowired
 	private UsersRepository repository;
 
-	public Users Register(Users users) throws Exception {
+	public Users register(Users users) throws Exception {
 		Users users2 = this.repository.findByEmailIgnoreCase(users.getEmail());
 
 		if (users2 != null)
-			throw new Exception("UserData  Alrady Stored");
+			throw new Exception("User data  already stored");
 
 		return this.repository.save(users);
 	}
@@ -46,27 +46,27 @@ public class UsersService {
 		return auth;
 	}
 
-	public Users getbyid(int id) throws Exception {
+	public Users getById(int id) throws Exception {
 		return this.repository.findById(id).orElseThrow(() -> new Exception("user Not Found"));
 	}
 
-	public List<Users> getall() {
+	public List<Users> getAll() {
 		return this.repository.findAll();
 	}
 
-	public List<UsersTask> getusertask(int id) {
+	public List<UsersTask> getUserTask(int id) {
 		return this.repository.findByid(id, UsersTask.class);
 	}
 
-	public List<UsersTask> showusertask(int id) {
+	public List<UsersTask> showUserTask(int id) {
 		return this.repository.findByid(id, UsersTask.class);
 	}
 
-	public List<UserTaskReview> showtaskreview(int id) {
+	public List<UserTaskReview> showTaskReview(int id) {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
 
-	public List<UserTaskReview> showtaskreviewFORADMIN(int id) {
+	public List<UserTaskReview> showTaskReviewFORADMIN(int id) {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
 

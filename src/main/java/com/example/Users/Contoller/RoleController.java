@@ -21,7 +21,7 @@ public class RoleController {
 
 	@PostMapping("/role")
 	@PreAuthorize("hasAuthority	('setRole')")
-	public ResponseEntity<?> setroles(@RequestBody Roles roles) {
+	public ResponseEntity<?> setRoles(@RequestBody Roles roles) {
 		try {
 			Roles roles2 = this.roleService.setrole(roles);
 
