@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.Success;
 import com.example.Users.Service.UserTaskService;
 import com.example.Users.entity.UsersTaskEntity;
@@ -34,7 +35,7 @@ public class UserTaskController {
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage("Something wrong , You can not assign task to user", "Error"),
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_TASK_NOT_STORED, "Error"),
 					HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -51,7 +52,7 @@ public class UserTaskController {
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage("You Cant chang status of Working status", "Error"),
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.STATUS_NOT_UPDATE, "Error"),
 					HttpStatus.BAD_REQUEST);
 		}
 	}

@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserTaskRatingService;
 import com.example.Users.entity.UserRatingDTO;
 import com.example.Users.entity.UserTaskRatingEntity;
@@ -31,12 +35,15 @@ public class UserTaskRatingController {
 
 			UserTaskRatingEntity entity2 = this.ratingService.setrating(dto);
 
-			return new ResponseEntity<>(new Success("Success", "Success", entity2), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.RATING, SuccessMessageKey.USER_TASK_REVIEW_M011101, entity2),
+					HttpStatus.OK);
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage("You can't Give Reivew it may not  Completed or not get ",
-					"Task not Completed or not Assign"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_RATING, ErrorMessageKey.USER_TASK_REVIEW_E031401),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 

@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserRoleService;
 import com.example.Users.entity.UserRoleDTO;
 import com.example.Users.entity.UserRoleEntity;
@@ -28,10 +32,12 @@ public class UserRoleController {
 
 			UserRoleEntity roleEntity = this.userRoleService.assignUserRole(dto);
 
-			return new ResponseEntity<>(new Success("Success ", "Success", roleEntity), HttpStatus.OK);
+			return new ResponseEntity<>(new Success(SuccessMessageConstant.USER_ROLE_ADDED,
+					SuccessMessageKey.USER_ROLE_M031601, roleEntity), HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Something wrong  can not set user role ", "Error "),
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_ROLE_NOT_STORED, ErrorMessageKey.USER_ROLE_E031601),
 					HttpStatus.BAD_REQUEST);
 
 		}

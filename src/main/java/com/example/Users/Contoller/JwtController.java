@@ -15,6 +15,10 @@ import com.example.Users.Config.JwtRefreshToken;
 import com.example.Users.Config.JwtTokenUtil;
 import com.example.Users.Model.JwtRequest;
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Responce.SuccessMessageToken;
 import com.example.Users.Service.CustomerUserdetailsService;
 
@@ -41,15 +45,15 @@ public class JwtController {
 			if (jwtRequest.getUsername().isEmpty() && jwtRequest.getPassword().isEmpty() == false) {
 
 				return new ResponseEntity<>(
-						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
 						HttpStatus.BAD_REQUEST);
 			} else if (jwtRequest.getPassword().isEmpty() && jwtRequest.getUsername().isEmpty() == false) {
 				return new ResponseEntity<>(
-						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
 						HttpStatus.BAD_REQUEST);
 			} else {
 				return new ResponseEntity<>(
-						new ErrorMessage("Invlid Username or Password", "Please enter Username or password "),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
 						HttpStatus.BAD_REQUEST);
 			}
 
@@ -63,7 +67,7 @@ public class JwtController {
 			} catch (Exception e) {
 
 				return new ResponseEntity<>(
-						new ErrorMessage("Bad Credintial", "Please enter Valid username and password"),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
 						HttpStatus.BAD_REQUEST);
 
 			}
@@ -81,7 +85,9 @@ public class JwtController {
 
 		System.out.println(reftoken);
 
-		return new ResponseEntity<>(new SuccessMessageToken("Success", "success", token, reftoken), HttpStatus.OK);
+		return new ResponseEntity<>(
+				new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, token, reftoken),
+				HttpStatus.OK);
 	}
 
 }

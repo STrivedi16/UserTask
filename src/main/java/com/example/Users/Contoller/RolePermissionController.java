@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.RolePermissionService;
 import com.example.Users.entity.RolePermissionDTO;
 import com.example.Users.entity.RolePermissionEntity;
@@ -27,11 +31,12 @@ public class RolePermissionController {
 
 			RolePermissionEntity entity = this.rolePermissionService.setrolepermission(dto);
 
-			return new ResponseEntity<>(new Success("Success", "Success", entity), HttpStatus.OK);
+			return new ResponseEntity<>(new Success(SuccessMessageConstant.ROLE_PERMISSION_ADDED,
+					SuccessMessageKey.ROLE_PERMISSION_M031801, entity), HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in set role to permission", "Error"),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ROLE_PERMISSION_NOT_STORED,
+					ErrorMessageKey.ROlE_PERMISSION_E031801), HttpStatus.BAD_REQUEST);
 		}
 	}
 

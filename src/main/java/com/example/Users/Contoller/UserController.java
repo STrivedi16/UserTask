@@ -18,8 +18,12 @@ import com.example.Users.Config.JwtFilter;
 import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.ResourceNotFoundException;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UsersService;
 import com.example.Users.entity.Users;
 
@@ -53,20 +57,25 @@ public class UserController {
 
 					Users users2 = this.service.register(users);
 
-					return new ResponseEntity<>(new Success("Success", "success", users2), HttpStatus.OK);
+					return new ResponseEntity<>(
+							new Success(SuccessMessageConstant.SUCCESS, SuccessMessageKey.USER_M031101, users2),
+							HttpStatus.OK);
 
 				} else {
 
-					return new ResponseEntity<>(new ErrorMessage(
-							"Your Password is incorrect or invalid Your Need to add  Atlist One Digit , One Upper case Letter , One lowerCase letter, one Spcial charector, only 6-8 letter are allowed",
-							"error"), HttpStatus.NOT_ACCEPTABLE);
+					return new ResponseEntity<>(
+							new ErrorMessage(ErrorMessageConstant.INVALID_PASSWORD, ErrorMessageKey.USER_E031102),
+							HttpStatus.NOT_ACCEPTABLE);
 				}
 			} catch (Exception e) {
-				return new ResponseEntity<>(new ErrorMessage("Error in Creation", "Error"), HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<>(
+						new ErrorMessage(ErrorMessageConstant.NOT_STORED, ErrorMessageKey.USER_E031101),
+						HttpStatus.NOT_ACCEPTABLE);
 			}
 		} else {
-			return new ResponseEntity<>(new ErrorMessage("You might have not enter Email, Password or Name",
-					"Name , Email, Password are the Mendetory for register"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.DETAILS_INCOPLETE, ErrorMessageKey.USER_E031101),
+					HttpStatus.BAD_REQUEST);
 		}
 
 	}
@@ -77,9 +86,11 @@ public class UserController {
 
 			if (id == filter.id) {
 				Users users = this.service.getById(id);
-				return new ResponseEntity<>(new Success("Success", "Success", users), HttpStatus.OK);
+				return new ResponseEntity<>(
+						new Success(SuccessMessageConstant.USER_DETAIL, SuccessMessageKey.USER_M031102, users),
+						HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(new ErrorMessage("You Can not access Other Account details", "Not Access"),
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, "Not Access"),
 						HttpStatus.BAD_REQUEST);
 			}
 
@@ -95,10 +106,13 @@ public class UserController {
 
 			List<Users> list = this.service.getAll();
 
-			return new ResponseEntity<>(new Success("Succcess", "Success", list), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.USER_DETAIL, SuccessMessageKey.USER_M031102, list),
+					HttpStatus.OK);
 
 		} catch (ResourceNotFoundException e) {
-			return new ResponseEntity<>(new ErrorMessage(e.getMessage(), "Not Found"), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new ErrorMessage(e.getMessage(), ErrorMessageKey.USER_E031105),
+					HttpStatus.NOT_FOUND);
 
 		}
 	}
@@ -110,11 +124,15 @@ public class UserController {
 
 			List<UsersTask> list = this.service.getUserTask(id);
 
-			return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.USER_TASK_SHOW, SuccessMessageKey.USER_TASK_M031302, list),
+					HttpStatus.OK);
 
 		} catch (ResourceNotFoundException e) {
 
-			return new ResponseEntity<>(new ErrorMessage(e.getMessage(), "Not Found"), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_NOT_FOUND, ErrorMessageKey.USER_TASK_E031302),
+					HttpStatus.NOT_FOUND);
 
 		}
 	}
@@ -127,18 +145,23 @@ public class UserController {
 
 				List<UsersTask> list = this.service.getUserTask(id);
 
-				return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
+				return new ResponseEntity<>(
+						new Success(SuccessMessageConstant.USER_TASK_SHOW, SuccessMessageKey.USER_TASK_M031302, list),
+						HttpStatus.OK);
 
 			}
 
 			else {
 
-				return new ResponseEntity<>(new ErrorMessage("You Don't Have Access to show other task", "Error"),
+				return new ResponseEntity<>(
+						new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_E030001),
 						HttpStatus.BAD_REQUEST);
 			}
 		} catch (ResourceNotFoundException e) {
 
-			return new ResponseEntity<>(new ErrorMessage(e.getMessage(), "Not Found"), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_NOT_FOUND, ErrorMessageKey.USER_TASK_E031302),
+					HttpStatus.NOT_FOUND);
 
 		}
 	}
@@ -150,14 +173,19 @@ public class UserController {
 			if (id == filter.id) {
 				List<UserTaskReview> review = this.service.showTaskReview(id);
 
-				return new ResponseEntity<>(new Success("Success", "Success", review), HttpStatus.OK);
+				return new ResponseEntity<>(
+						new Success(SuccessMessageConstant.RATING, SuccessMessageKey.USER_TASK_REVIEW_M011102, review),
+						HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(new ErrorMessage("You Don't have a Access to show Other review", "Error"),
+				return new ResponseEntity<>(
+						new ErrorMessage(ErrorMessageConstant.ACCESS_DENIED, ErrorMessageKey.ACCESS_E030001),
 						HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_RATING, ErrorMessageKey.USER_TASK_E031301),
+					HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -168,9 +196,13 @@ public class UserController {
 
 			List<UserTaskReview> list = this.service.showTaskReviewFORADMIN(id);
 
-			return new ResponseEntity<>(new Success("Success", "Success", list), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.RATING, SuccessMessageKey.USER_TASK_REVIEW_M011102, list),
+					HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in get list of review", "Error"), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_RATING, ErrorMessageKey.USER_TASK_REVIEW_E031403),
+					HttpStatus.NOT_FOUND);
 		}
 	}
 }

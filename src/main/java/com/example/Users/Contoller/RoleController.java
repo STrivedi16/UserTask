@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.RoleService;
 import com.example.Users.entity.Roles;
 
@@ -25,10 +29,14 @@ public class RoleController {
 		try {
 			Roles roles2 = this.roleService.setrole(roles);
 
-			return new ResponseEntity<>(new Success("Success", "Success", roles2), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.ROLE_ADD, SuccessMessageKey.ROLE_M031501, roles2),
+					HttpStatus.OK);
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage("Error in stored in role ", "Error "), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.ROLE_NOT_STORED, ErrorMessageKey.ROLE_E031501),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 }

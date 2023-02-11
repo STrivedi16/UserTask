@@ -1,0 +1,9 @@
+Treeth Password : Teerth@123$
+
+
+
+Query with alias that is used in join ( that is also used in hql )
+
+
+select c.name , c.city, c.number ,d.address, d.pincode from customer_entity as c join  detail as d 
+on d.did=c.address_did

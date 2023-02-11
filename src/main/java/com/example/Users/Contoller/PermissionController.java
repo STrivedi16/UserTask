@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.PermisionService;
 import com.example.Users.entity.Permissions;
 
@@ -26,10 +30,13 @@ public class PermissionController {
 
 			Permissions permissions2 = this.service.SetPermission(permissions);
 
-			return new ResponseEntity<>(new Success("success", "Success", permissions2), HttpStatus.OK);
+			return new ResponseEntity<>(new Success(SuccessMessageConstant.PERMISSION_STORED,
+					SuccessMessageKey.PERMISSION_M0313701, permissions2), HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in set permission", "Error"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.PERMISSION_NOT_STORED, ErrorMessageKey.PERMISSION_E031701),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 }
