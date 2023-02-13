@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserTaskService;
 import com.example.Users.entity.UsersTaskEntity;
 import com.example.Users.entity.UsertaskDTO;
@@ -31,11 +34,14 @@ public class UserTaskController {
 
 			UsersTaskEntity taskEntity = this.taskService.addtaskuser(dto);
 
-			return new ResponseEntity<>(new Success("Success", "Success", taskEntity), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.USER_TASK_ADD, SuccessMessageKey.USER_TASK_M031301, taskEntity),
+					HttpStatus.OK);
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.USER_TASK_NOT_STORED, "Error"),
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.USER_TASK_NOT_STORED, ErrorMessageKey.USER_TASK_E031301),
 					HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -48,11 +54,14 @@ public class UserTaskController {
 
 			UsersTaskEntity entity = this.taskService.updatestatus(id, dto);
 
-			return new ResponseEntity<>(new Success("Success", "Success", entity), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.STATUS, SuccessMessageKey.STATUS_M031901, entity),
+					HttpStatus.OK);
 
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.STATUS_NOT_UPDATE, "Error"),
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.STATUS_NOT_UPDATE, ErrorMessageKey.STATUS_E031903),
 					HttpStatus.BAD_REQUEST);
 		}
 	}

@@ -30,4 +30,12 @@ public class ErrorMessageConstant {
 	// user role
 	public static final String USER_ROLE_NOT_STORED = "user role  not stored";
 
+	// task not stored
+	public static final String TASK_NOT_STORED = "task not stored";
+
+	// file not upload
+	public static final String FILE_NOT_UPLOADED = "filr not uploaded";
+
+	public static final String FILE_DATA_NOT_FETCHED = "file data not fetched";
+
 }

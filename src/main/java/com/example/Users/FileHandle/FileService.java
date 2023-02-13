@@ -27,4 +27,20 @@ public class FileService {
 
 	}
 
+	public byte[] downloadfile(String filename) throws IOException {
+		System.err.println(filename);
+
+		FileEntity file = this.fileRepository.findByName(filename);
+
+		System.out.println("sssss");
+
+		System.err.println(file);
+
+		byte[] imageData = FileUtils.decompressImage(file.getImagedata());
+
+		System.err.println("sss");
+		return imageData;
+
+	}
+
 }

@@ -13,6 +13,7 @@ public class SuccessMessageKey {
 	public static final String ROLE_PERMISSION = "18";
 	public static final String USER_TASK_REVIEW = "14";
 	public static final String STAUS = "19";
+	public static final String FILE = "20";
 
 	public static final String LOGIN_M031100 = HEADER + USER + "00";// login
 	public static final String USER_M031101 = HEADER + USER + "01";// STORED
@@ -32,4 +33,13 @@ public class SuccessMessageKey {
 	public static final String USER_ROLE_M031601 = HEADER + USER_ROLE + "01";// user role
 
 	public static final String ROLE_PERMISSION_M031801 = HEADER + ROLE_PERMISSION + "01";// ADD ROLE PERMISSION
+
+	public static final String TASK_M031201 = HEADER + TASK + "01";// task added
+
+	// status
+	public static final String STATUS_M031901 = HEADER + STAUS + "01";// status update
+
+	public static final String FILE_M032001 = HEADER + FILE + "01";// file upload
+
+	public static final String FILE_M012002 = HEADER + FILE + "02"; // file data fetched
 }

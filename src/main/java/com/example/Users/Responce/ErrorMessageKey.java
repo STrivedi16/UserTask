@@ -14,6 +14,7 @@ public class ErrorMessageKey {
 	public static final String ROLE_PERMISSION = "18";
 	public static final String USER_TASK_REVIEW = "14";
 	public static final String STAUS = "19";
+	public static final String FILE = "20";
 
 	// Access Denied
 	public static final String ACCESS_E030001 = HEADER + ACCESS_DENIED + "01";// ACCESS DENIED
@@ -49,4 +50,8 @@ public class ErrorMessageKey {
 
 	public static final String USER_ROLE_E031601 = HEADER + USER_ROLE + "01";// user role
 
+	// file
+	public static final String FILE_E032001 = HEADER + FILE + "01";// file not upload
+
+	public static final String FILE_E032002 = HEADER + FILE + "02";// file data not fetched
 }

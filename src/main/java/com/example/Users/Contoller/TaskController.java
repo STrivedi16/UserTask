@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Responce.ErrorMessage;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.Success;
+import com.example.Users.Responce.SuccessMessageConstant;
+import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.TasksService;
 import com.example.Users.entity.Tasks;
 
@@ -26,10 +30,14 @@ public class TaskController {
 
 			Tasks tasks2 = this.service.setTask(tasks);
 
-			return new ResponseEntity<>(new Success("Sucess", "Success", tasks2), HttpStatus.OK);
+			return new ResponseEntity<>(
+					new Success(SuccessMessageConstant.TASK_ADD, SuccessMessageKey.TASK_M031201, tasks2),
+					HttpStatus.OK);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ErrorMessage("Error in Storing task", "Error"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(
+					new ErrorMessage(ErrorMessageConstant.TASK_NOT_STORED, ErrorMessageKey.TASK_E031201),
+					HttpStatus.BAD_REQUEST);
 		}
 	}
 }
