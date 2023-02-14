@@ -7,7 +7,7 @@ import com.example.Users.Config.JwtFilter;
 import com.example.Users.Repository.QueryPortalRepository;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.entity.QueryPortal;
-import com.example.Users.entity.QueryPortalDTO;
+import com.example.Users.entity.QueryPortalDto;
 import com.example.Users.entity.Users;
 
 @Service
@@ -22,7 +22,7 @@ public class QueryService {
 	@Autowired
 	private UsersRepository repository;
 
-	public QueryPortal setQuery(QueryPortalDTO dto) throws Exception {
+	public QueryPortal setQuery(QueryPortalDto dto) throws Exception {
 		QueryPortal portal = new QueryPortal();
 
 		portal.setId(dto.getId());

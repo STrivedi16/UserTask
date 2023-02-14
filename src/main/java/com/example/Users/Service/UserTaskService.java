@@ -9,7 +9,7 @@ import com.example.Users.Repository.UsersRepository;
 import com.example.Users.entity.Tasks;
 import com.example.Users.entity.Users;
 import com.example.Users.entity.UsersTaskEntity;
-import com.example.Users.entity.UsertaskDTO;
+import com.example.Users.entity.UsertaskDto;
 
 @Service
 public class UserTaskService {
@@ -23,7 +23,7 @@ public class UserTaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 
-	public UsersTaskEntity addtaskuser(UsertaskDTO dto) throws Exception {
+	public UsersTaskEntity addTaskUser(UsertaskDto dto) throws Exception {
 		Users users = this.usersRepository.findById(dto.getUserid()).orElseThrow(() -> new Exception("User not Found"));
 
 		Tasks tasks = this.taskRepository.findById(dto.getTaskid()).orElseThrow(() -> new Exception("Task not Found"));
@@ -39,7 +39,7 @@ public class UserTaskService {
 		return this.userTaskRepo.save(entity);
 	}
 
-	public UsersTaskEntity updatestatus(int id, UsertaskDTO dto) throws Exception {
+	public UsersTaskEntity updateStatus(int id, UsertaskDto dto) throws Exception {
 
 		UsersTaskEntity entity = this.userTaskRepo.findById(id).orElseThrow(() -> new Exception("Data not get"));
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.Success;
-import com.example.Users.Service.CustomerUserdetailsService;
+import com.example.Users.Service.CustomerUserDetailsService;
 import com.example.Users.entity.Users;
 
 @RestController
@@ -27,7 +27,7 @@ public class GenerateAccessToken {
 	private UsersRepository repository;
 
 	@Autowired
-	private CustomerUserdetailsService customerUserdetailsService;
+	private CustomerUserDetailsService customerUserdetailsService;
 
 	@GetMapping("/generatetoken")
 	public ResponseEntity<?> GeneratenewToken(

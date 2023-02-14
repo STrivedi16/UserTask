@@ -2,6 +2,9 @@ package com.example.Users.Responce;
 
 public class ErrorMessageConstant {
 
+	// http request
+	public static final String REQUEST_ERROR = "http request not proper";
+
 	public static final String USERNAME_PASSWORD_INVALID = "invalid username or password";
 	public static final String INVALID_TOKEN = "invalid token";
 	public static final String INVALID_PASSWORD = "invalid password";

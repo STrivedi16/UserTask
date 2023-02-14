@@ -20,7 +20,7 @@ import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Responce.SuccessMessageToken;
-import com.example.Users.Service.CustomerUserdetailsService;
+import com.example.Users.Service.CustomerUserDetailsService;
 
 @RestController
 public class JwtController {
@@ -29,7 +29,7 @@ public class JwtController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private CustomerUserdetailsService customerUserdetailsService;
+	private CustomerUserDetailsService customerUserdetailsService;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;

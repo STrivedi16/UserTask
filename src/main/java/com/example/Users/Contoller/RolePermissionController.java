@@ -14,7 +14,7 @@ import com.example.Users.Responce.Success;
 import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.RolePermissionService;
-import com.example.Users.entity.RolePermissionDTO;
+import com.example.Users.entity.RolePermissionDto;
 import com.example.Users.entity.RolePermissionEntity;
 
 @RestController
@@ -24,12 +24,12 @@ public class RolePermissionController {
 	private RolePermissionService rolePermissionService;
 
 	@PostMapping("/rolepermission")
-	public ResponseEntity<?> setRolePermission(@RequestBody RolePermissionDTO dto) {
+	public ResponseEntity<?> setRolePermission(@RequestBody RolePermissionDto dto) {
 		System.out.println(dto.getPermissionid() + "" + dto.getRoleid());
 
 		try {
 
-			RolePermissionEntity entity = this.rolePermissionService.setrolepermission(dto);
+			RolePermissionEntity entity = this.rolePermissionService.setRolePermission(dto);
 
 			return new ResponseEntity<>(new Success(SuccessMessageConstant.ROLE_PERMISSION_ADDED,
 					SuccessMessageKey.ROLE_PERMISSION_M031801, entity), HttpStatus.OK);

@@ -14,7 +14,7 @@ import com.example.Users.Repository.UsersRepository;
 import com.example.Users.entity.Users;
 
 @Service
-public class CustomerUserdetailsService implements UserDetailsService {
+public class CustomerUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UsersRepository repository;

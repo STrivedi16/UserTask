@@ -18,7 +18,7 @@ import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserTaskService;
 import com.example.Users.entity.UsersTaskEntity;
-import com.example.Users.entity.UsertaskDTO;
+import com.example.Users.entity.UsertaskDto;
 
 @RestController
 public class UserTaskController {
@@ -28,11 +28,11 @@ public class UserTaskController {
 
 	@PostMapping("/usertask")
 	@PreAuthorize("hasAuthority('AssignTask')")
-	public ResponseEntity<?> assignTask(@RequestBody UsertaskDTO dto) {
+	public ResponseEntity<?> assignTask(@RequestBody UsertaskDto dto) {
 
 		try {
 
-			UsersTaskEntity taskEntity = this.taskService.addtaskuser(dto);
+			UsersTaskEntity taskEntity = this.taskService.addTaskUser(dto);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.USER_TASK_ADD, SuccessMessageKey.USER_TASK_M031301, taskEntity),
@@ -48,11 +48,11 @@ public class UserTaskController {
 
 	@PatchMapping("/updatestatus/{id}")
 	@PreAuthorize("hasAuthority('UpdateStatus')")
-	public ResponseEntity<?> updateUserTaskStatus(@PathVariable("id") int id, @RequestBody UsertaskDTO dto) {
+	public ResponseEntity<?> updateUserTaskStatus(@PathVariable("id") int id, @RequestBody UsertaskDto dto) {
 		System.err.println(dto.getStatus());
 		try {
 
-			UsersTaskEntity entity = this.taskService.updatestatus(id, dto);
+			UsersTaskEntity entity = this.taskService.updateStatus(id, dto);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.STATUS, SuccessMessageKey.STATUS_M031901, entity),

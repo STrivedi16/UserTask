@@ -28,7 +28,7 @@ public class PermissionController {
 	public ResponseEntity<?> setPermission(@RequestBody Permissions permissions) {
 		try {
 
-			Permissions permissions2 = this.service.SetPermission(permissions);
+			Permissions permissions2 = this.service.setPermission(permissions);
 
 			return new ResponseEntity<>(new Success(SuccessMessageConstant.PERMISSION_STORED,
 					SuccessMessageKey.PERMISSION_M0313701, permissions2), HttpStatus.OK);

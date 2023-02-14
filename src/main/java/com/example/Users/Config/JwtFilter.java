@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.Users.Repository.UsersRepository;
-import com.example.Users.Service.CustomerUserdetailsService;
+import com.example.Users.Service.CustomerUserDetailsService;
 import com.example.Users.entity.Users;
 
 @Component
@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	private UsersRepository repository;
 
 	@Autowired
-	private CustomerUserdetailsService customerUserdetailsService;
+	private CustomerUserDetailsService customerUserdetailsService;
 
 	public static int id = 0;
 

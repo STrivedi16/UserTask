@@ -7,7 +7,7 @@ import com.example.Users.Repository.PermissionsRepository;
 import com.example.Users.Repository.RolePermissionRepository;
 import com.example.Users.Repository.RoleRepository;
 import com.example.Users.entity.Permissions;
-import com.example.Users.entity.RolePermissionDTO;
+import com.example.Users.entity.RolePermissionDto;
 import com.example.Users.entity.RolePermissionEntity;
 import com.example.Users.entity.Roles;
 
@@ -23,7 +23,7 @@ public class RolePermissionService {
 	@Autowired
 	private PermissionsRepository permissionsRepository;
 
-	public RolePermissionEntity setrolepermission(RolePermissionDTO dto) throws Exception {
+	public RolePermissionEntity setRolePermission(RolePermissionDto dto) throws Exception {
 		Roles roles = this.roleRepository.findById(dto.getRoleid()).orElseThrow(() -> new Exception("Role not get "));
 
 		Permissions permissions = this.permissionsRepository.findById(dto.getPermissionid())

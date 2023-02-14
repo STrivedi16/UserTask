@@ -1,5 +1,7 @@
 package com.example.Users.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,11 @@ public class PermisionService {
 	@Autowired
 	private PermissionsRepository permissionsRepository;
 
-	public Permissions SetPermission(Permissions permissions) {
+	public Permissions setPermission(Permissions permissions) {
 		return this.permissionsRepository.save(permissions);
+	}
+
+	public List<Permissions> getPermissions() {
+		return this.permissionsRepository.findAll();
 	}
 }

@@ -12,7 +12,7 @@ public class RoleService {
 	@Autowired
 	private RoleRepository repository;
 
-	public Roles setrole(Roles roles) {
+	public Roles setRole(Roles roles) {
 		return this.repository.save(roles);
 	}
 

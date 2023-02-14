@@ -1,4 +1,6 @@
-package com.example.Users.entity;
+package com.example.Users.DTO;
+
+import com.example.Users.entity.Status;
 
 public class UsertaskDto {
 

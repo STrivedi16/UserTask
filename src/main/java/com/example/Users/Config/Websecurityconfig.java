@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.Users.Service.CustomerUserdetailsService;
+import com.example.Users.Service.CustomerUserDetailsService;
 
 @Configuration // TO GENERATE BEAN AND WHILE EXCUTION TO ADD BEAN
 @EnableWebSecurity // TO PROVIDE A SECURUTY
@@ -22,7 +22,7 @@ import com.example.Users.Service.CustomerUserdetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private CustomerUserdetailsService customerUserdetailsService;
+	private CustomerUserDetailsService customerUserdetailsService;
 
 	@Autowired
 	private JwtAuthEntryPoint authEntryPoint;

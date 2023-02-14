@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.example.Users.DTO.UserDto;
+import com.example.Users.Interface.UserInterface;
 import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersPermission;
 import com.example.Users.Interface.UsersTask;
@@ -19,13 +21,20 @@ public class UsersService {
 	@Autowired
 	private UsersRepository repository;
 
-	public Users register(Users users) throws Exception {
-		Users users2 = this.repository.findByEmailIgnoreCase(users.getEmail());
+	public Users register(UserDto users) throws Exception {
+		Users usersdata = this.repository.findByEmailIgnoreCase(users.getEmail());
 
-		if (users2 != null)
-			throw new Exception("User data  already stored");
+		if (usersdata != null)
+			throw new Exception("user data  already stored");
 
-		return this.repository.save(users);
+		Users newusers = new Users();
+		newusers.setName(users.getName());
+		newusers.setEmail(users.getEmail());
+		newusers.setPassword(users.getPassword());
+		newusers.setAdd(users.getAddress());
+		newusers.setCity(users.getCity());
+
+		return this.repository.save(newusers);
 	}
 
 	public ArrayList<SimpleGrantedAuthority> getAuthorities(int id) {
@@ -47,11 +56,11 @@ public class UsersService {
 	}
 
 	public Users getById(int id) throws Exception {
-		return this.repository.findById(id).orElseThrow(() -> new Exception("user Not Found"));
+		return this.repository.findById(id).orElseThrow(() -> new Exception("user not found"));
 	}
 
-	public List<Users> getAll() {
-		return this.repository.findAll();
+	public List<UserInterface> getAll() {
+		return this.repository.findAll(UserInterface.class);
 	}
 
 	public List<UsersTask> getUserTask(int id) {
@@ -66,7 +75,7 @@ public class UsersService {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
 
-	public List<UserTaskReview> showTaskReviewFORADMIN(int id) {
+	public List<UserTaskReview> showTaskReviewForAdmin(int id) {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
 

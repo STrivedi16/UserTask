@@ -26,7 +26,8 @@ public class GlobalExcaptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
 		return new ResponseEntity<Object>(
-				new ErrorMessage("Please change the http method ", "Http Method Is Not Applied"), HttpStatus.NOT_FOUND);
+				new ErrorMessage(ErrorMessageConstant.REQUEST_ERROR, ErrorMessageKey.REQUEST_E0301),
+				HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(NoSuchElementException.class)

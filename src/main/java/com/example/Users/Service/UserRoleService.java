@@ -7,7 +7,7 @@ import com.example.Users.Repository.RoleRepository;
 import com.example.Users.Repository.UserRoleRepository;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.entity.Roles;
-import com.example.Users.entity.UserRoleDTO;
+import com.example.Users.entity.UserRoleDto;
 import com.example.Users.entity.UserRoleEntity;
 import com.example.Users.entity.Users;
 
@@ -23,7 +23,7 @@ public class UserRoleService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public UserRoleEntity assignUserRole(UserRoleDTO dto) throws Exception {
+	public UserRoleEntity assignUserRole(UserRoleDto dto) throws Exception {
 		Users users = this.usersRepository.findById(dto.getUserid())
 				.orElseThrow(() -> new Exception("User id  is not found"));
 

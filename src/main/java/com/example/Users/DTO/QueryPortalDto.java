@@ -1,4 +1,4 @@
-package com.example.Users.entity;
+package com.example.Users.DTO;
 
 public class QueryPortalDto {
 

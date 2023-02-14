@@ -11,80 +11,67 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileHepler {
+public class UserComentFileHelper {
 
 	@Autowired
-	private UsersFileEntity entity;
+	private UserComent coment;
 
-	// this will check that file is of excel format
-	public static boolean checkExcelFormet(MultipartFile file) {
-		String contenttype = file.getContentType();
-
-		if (contenttype.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+	public static boolean checkFileFormat(MultipartFile file) {
+		if (file.getContentType().equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
 			return true;
 		} else {
 			return false;
-
 		}
-
 	}
 
-	// convert excel to list
+	public static List<UserComent> storeToDb(MultipartFile file) throws Exception {
+		List<UserComent> coments = new ArrayList<>();
 
-	public static List<UsersFileEntity> convertExcelToList(MultipartFile multipartFile) throws Exception {
-		List<UsersFileEntity> list = new ArrayList<>();
 		try {
-
-			XSSFWorkbook workbook = new XSSFWorkbook(multipartFile.getInputStream());
+			XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
 
 			XSSFSheet sheet = workbook.getSheetAt(0);
 
 			Iterator<Row> iterator = sheet.iterator();
 
 			int rowNumber = 0;
-
 			while (iterator.hasNext()) {
 				Row row = iterator.next();
 				if (rowNumber == 0) {
 					rowNumber++;
 					continue;
 				}
+
 				Iterator<Cell> cells = row.iterator();
+
 				int cid = 0;
-				UsersFileEntity entity = new UsersFileEntity();
+				UserComent coment = new UserComent();
 				while (cells.hasNext()) {
 					Cell cell = cells.next();
+
 					switch (cid) {
 					case 0:
-						entity.setId((int) cell.getNumericCellValue());
 
+						coment.setId((int) cell.getNumericCellValue());
 						break;
-
 					case 1:
-						entity.setName(cell.getStringCellValue());
+						coment.setName(cell.getStringCellValue());
 						break;
 					case 2:
-						entity.setDiscription(cell.getStringCellValue());
-						break;
-
-					case 3:
-						entity.setSalary((long) cell.getNumericCellValue());
+						coment.setComent(cell.getStringCellValue());
 						break;
 					default:
 						break;
 					}
 					cid++;
-
 				}
-				list.add(entity);
 
+				coments.add(coment);
 			}
 
 		} catch (Exception e) {
 			throw new Exception("not stored");
 		}
-		return list;
-
+		return coments;
 	}
-
 }

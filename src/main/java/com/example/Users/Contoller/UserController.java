@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Config.JwtFilter;
+import com.example.Users.DTO.UserDto;
+import com.example.Users.Interface.UserInterface;
 import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Responce.ErrorMessage;
@@ -36,7 +38,7 @@ public class UserController {
 	JwtFilter filter = new JwtFilter();
 
 	@PostMapping("/register")
-	public ResponseEntity<?> setUsers(@RequestBody Users users) {
+	public ResponseEntity<?> setUsers(@RequestBody UserDto users) {
 
 		if (users.getName().isEmpty() == false && users.getEmail().isEmpty() == false
 				&& users.getPassword().isEmpty() == false) {
@@ -104,7 +106,7 @@ public class UserController {
 	public ResponseEntity<?> getAllData() {
 		try {
 
-			List<Users> list = this.service.getAll();
+			List<UserInterface> list = this.service.getAll();
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.USER_DETAIL, SuccessMessageKey.USER_M031102, list),
@@ -194,7 +196,7 @@ public class UserController {
 	public ResponseEntity<?> showAdminReview(@PathVariable("id") int id) {
 		try {
 
-			List<UserTaskReview> list = this.service.showTaskReviewFORADMIN(id);
+			List<UserTaskReview> list = this.service.showTaskReviewForAdmin(id);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.RATING, SuccessMessageKey.USER_TASK_REVIEW_M011102, list),

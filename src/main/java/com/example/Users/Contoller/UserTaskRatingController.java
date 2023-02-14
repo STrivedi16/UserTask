@@ -15,7 +15,7 @@ import com.example.Users.Responce.Success;
 import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserTaskRatingService;
-import com.example.Users.entity.UserRatingDTO;
+import com.example.Users.entity.UserRatingDto;
 import com.example.Users.entity.UserTaskRatingEntity;
 
 @RestController
@@ -26,14 +26,14 @@ public class UserTaskRatingController {
 
 	@PostMapping("/rating")
 	@PreAuthorize("hasAuthority('GiveRating')")
-	public ResponseEntity<?> setRating(@RequestBody UserRatingDTO dto) {
+	public ResponseEntity<?> setRating(@RequestBody UserRatingDto dto) {
 		try {
 
 			System.err.println(dto.getTask());
 			System.err.println(dto.getMesssage() + " " + dto.getRating() + " " + dto.getRatedby() + " " + dto.getId()
 					+ " " + dto.getTask());
 
-			UserTaskRatingEntity entity2 = this.ratingService.setrating(dto);
+			UserTaskRatingEntity entity2 = this.ratingService.setRating(dto);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.RATING, SuccessMessageKey.USER_TASK_REVIEW_M011101, entity2),

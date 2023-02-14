@@ -1,6 +1,9 @@
 package com.example.Users.FileHandle;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +54,7 @@ public class UserFileController {
 	}
 
 	@GetMapping("/file/list")
-	public ResponseEntity<?> getall()
+	public ResponseEntity<?> getAllFromFile()
 
 	{
 		try {
@@ -67,5 +70,30 @@ public class UserFileController {
 					new ErrorMessage(ErrorMessageConstant.FILE_DATA_NOT_FETCHED, ErrorMessageKey.FILE_E032002),
 					HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@GetMapping("/excel")
+	public void generateExcel(HttpServletResponse response) throws IOException {
+
+		response.setContentType("application/octet-stream");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment;filename=data.xls";
+
+		response.setHeader(headerKey, headerValue);
+
+		fileService.exportToExcel(response);
+	}
+
+	@GetMapping("/userfile")
+	public void userExcel(HttpServletResponse httpServletResponse) throws IOException {
+		httpServletResponse.setContentType("appication/octet-stream");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment;filename=data.xls";
+
+		httpServletResponse.setHeader(headerKey, headerValue);
+
+		fileService.generatExcel(httpServletResponse);
 	}
 }

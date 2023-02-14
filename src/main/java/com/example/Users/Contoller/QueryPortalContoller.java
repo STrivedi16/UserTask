@@ -11,7 +11,7 @@ import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.Success;
 import com.example.Users.Service.QueryService;
 import com.example.Users.entity.QueryPortal;
-import com.example.Users.entity.QueryPortalDTO;
+import com.example.Users.entity.QueryPortalDto;
 
 @RestController
 public class QueryPortalContoller {
@@ -20,7 +20,7 @@ public class QueryPortalContoller {
 	private QueryService queryService;
 
 	@PostMapping("/ask")
-	public ResponseEntity<?> setQuery(@RequestBody QueryPortalDTO dto) {
+	public ResponseEntity<?> setQuery(@RequestBody QueryPortalDto dto) {
 		try {
 
 			QueryPortal portal = this.queryService.setQuery(dto);

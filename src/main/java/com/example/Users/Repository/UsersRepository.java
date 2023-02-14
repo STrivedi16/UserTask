@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.Users.Interface.UserInterface;
 import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersPermission;
 import com.example.Users.Interface.UsersTask;
@@ -35,4 +36,8 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 			+ "join user_task_rating_entity ute on ut.id=ute.usertask_id\r\n"
 			+ "where u.id= :numid", nativeQuery = true)
 	List<UserTaskReview> findByID(@Param("numid") int id, Class<UserTaskReview> class1);
+
+	@Query(value = "select u.name, u.city, u.add, u.email from users u", nativeQuery = true)
+
+	List<UserInterface> findAll(Class<UserInterface> class1);
 }

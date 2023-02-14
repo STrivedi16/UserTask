@@ -16,6 +16,9 @@ public class ErrorMessageKey {
 	public static final String STAUS = "19";
 	public static final String FILE = "20";
 
+	// http request
+	public static final String REQUEST_E0301 = HEADER + "01";
+
 	// Access Denied
 	public static final String ACCESS_E030001 = HEADER + ACCESS_DENIED + "01";// ACCESS DENIED
 

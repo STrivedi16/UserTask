@@ -15,7 +15,7 @@ import com.example.Users.Responce.Success;
 import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Service.UserRoleService;
-import com.example.Users.entity.UserRoleDTO;
+import com.example.Users.entity.UserRoleDto;
 import com.example.Users.entity.UserRoleEntity;
 
 @RestController
@@ -26,7 +26,7 @@ public class UserRoleController {
 
 	@PostMapping("/userrole")
 	@PreAuthorize("hasAuthority	('addPermission')")
-	public ResponseEntity<?> setRoleToUser(@RequestBody UserRoleDTO dto) {
+	public ResponseEntity<?> setRoleToUser(@RequestBody UserRoleDto dto) {
 		System.out.println(dto.getUserid() + dto.getRoleid());
 		try {
 

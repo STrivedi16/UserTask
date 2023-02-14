@@ -27,7 +27,7 @@ public class RoleController {
 	@PreAuthorize("hasAuthority	('setRole')")
 	public ResponseEntity<?> setRoles(@RequestBody Roles roles) {
 		try {
-			Roles roles2 = this.roleService.setrole(roles);
+			Roles roles2 = this.roleService.setRole(roles);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.ROLE_ADD, SuccessMessageKey.ROLE_M031501, roles2),

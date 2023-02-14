@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.Users.Repository.UserTaskRatingRepository;
 import com.example.Users.Repository.UserTaskRepo;
 import com.example.Users.entity.Status;
-import com.example.Users.entity.UserRatingDTO;
+import com.example.Users.entity.UserRatingDto;
 import com.example.Users.entity.UserTaskRatingEntity;
 import com.example.Users.entity.UsersTaskEntity;
 
@@ -19,7 +19,7 @@ public class UserTaskRatingService {
 	@Autowired
 	private UserTaskRepo repo;
 
-	public UserTaskRatingEntity setrating(UserRatingDTO dto) throws Exception {
+	public UserTaskRatingEntity setRating(UserRatingDto dto) throws Exception {
 
 		UserTaskRatingEntity entities = new UserTaskRatingEntity();
 
