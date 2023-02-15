@@ -23,6 +23,7 @@ public class ErrorMessageKey {
 	public static final String ACCESS_E030001 = HEADER + ACCESS_DENIED + "01";// ACCESS DENIED
 
 	// FOR USER
+	public static final String USER_E031100 = "UT-E03" + USER + "00";// NOT LOGIN
 	public static final String USER_E031101 = "UT-E03" + USER + "01"; // NOT STORED
 	public static final String USER_E031102 = HEADER + USER + "02";// INVALID PASSWORD
 	public static final String USER_E031103 = HEADER + USER + "03";// // INVALID USERNME OR PASSWORD

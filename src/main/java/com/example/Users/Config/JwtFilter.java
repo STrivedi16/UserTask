@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.Users.Repository.UsersRepository;
+import com.example.Users.Responce.ErrorMessageConstant;
+import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Service.CustomerUserDetailsService;
 import com.example.Users.entity.Users;
 
@@ -65,9 +67,8 @@ public class JwtFilter extends OncePerRequestFilter {
 				}
 
 			} catch (Exception e) {
-				new ResponseEntity<>(
-						new com.example.Users.Responce.ErrorMessage("Error in Token or Your Token s invelid", "Error"),
-						HttpStatus.UNAUTHORIZED);
+				new ResponseEntity<>(new com.example.Users.Responce.ErrorMessage(ErrorMessageConstant.INVALID_TOKEN,
+						ErrorMessageKey.USER_E031104), HttpStatus.UNAUTHORIZED);
 
 			}
 

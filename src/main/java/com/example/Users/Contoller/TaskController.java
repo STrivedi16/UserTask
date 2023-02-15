@@ -26,6 +26,7 @@ public class TaskController {
 	@PostMapping("/task")
 	@PreAuthorize("hasAuthority('setTask')")
 	public ResponseEntity<?> setTask(@RequestBody Tasks tasks) {
+
 		try {
 
 			Tasks tasks2 = this.service.setTask(tasks);

@@ -45,15 +45,15 @@ public class JwtController {
 			if (jwtRequest.getUsername().isEmpty() && jwtRequest.getPassword().isEmpty() == false) {
 
 				return new ResponseEntity<>(
-						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031100),
 						HttpStatus.BAD_REQUEST);
 			} else if (jwtRequest.getPassword().isEmpty() && jwtRequest.getUsername().isEmpty() == false) {
 				return new ResponseEntity<>(
-						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031100),
 						HttpStatus.BAD_REQUEST);
 			} else {
 				return new ResponseEntity<>(
-						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031100),
 						HttpStatus.BAD_REQUEST);
 			}
 
@@ -67,7 +67,7 @@ public class JwtController {
 			} catch (Exception e) {
 
 				return new ResponseEntity<>(
-						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031101),
+						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031100),
 						HttpStatus.BAD_REQUEST);
 
 			}
