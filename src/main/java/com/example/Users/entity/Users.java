@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+
 public class Users implements UserDetails {
 
 	@Id
