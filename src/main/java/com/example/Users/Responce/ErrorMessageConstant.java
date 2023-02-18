@@ -9,7 +9,7 @@ public class ErrorMessageConstant {
 	public static final String INVALID_TOKEN = "invalid token";
 	public static final String INVALID_PASSWORD = "invalid password";
 	public static final String INVALID_EMAIL = "invalid email";
-	public static final String NOT_STORED = "not stored";
+	public static final String NOT_STORED = "not stored or all ready stored";
 	public static final String DETAILS_INCOPLETE = " some details are incomplete";
 
 	// ALL USER TASK MESSAGE

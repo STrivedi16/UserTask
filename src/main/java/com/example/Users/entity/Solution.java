@@ -27,6 +27,7 @@ public class Solution {
 
 	public String getSolution() {
 		return solution;
+
 	}
 
 	public void setSolution(String solution) {

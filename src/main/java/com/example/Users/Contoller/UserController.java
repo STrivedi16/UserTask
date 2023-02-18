@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,8 +37,12 @@ public class UserController {
 	private UsersService service;
 
 	JwtFilter filter = new JwtFilter();
+//
+//	@Autowired
+//	private UsersDao dao;
 
 	@PostMapping("/register")
+
 	public ResponseEntity<?> setUsers(@RequestBody UserDto users) {
 
 		if (users.getName().isEmpty() == false && users.getEmail().isEmpty() == false
@@ -45,13 +50,10 @@ public class UserController {
 			try {
 
 				System.err.println(users.getEmail());
-				System.err.println(users.getPassword());
 
 				Pattern p = Pattern.compile("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})");
 
 				Matcher matcher = p.matcher(users.getPassword());
-
-				System.out.println(users.getPassword());
 
 				System.err.println(matcher.matches());
 
@@ -72,7 +74,7 @@ public class UserController {
 			} catch (Exception e) {
 				return new ResponseEntity<>(
 						new ErrorMessage(ErrorMessageConstant.NOT_STORED, ErrorMessageKey.USER_E031101),
-						HttpStatus.NOT_ACCEPTABLE);
+						HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<>(
@@ -83,6 +85,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/{id}")
+	@Cacheable(key = "#id", value = "Users")
 	public ResponseEntity<?> getData(@PathVariable("id") int id) throws Exception {
 		try {
 
@@ -121,6 +124,8 @@ public class UserController {
 
 	@GetMapping("/usertask/{id}")
 	@PreAuthorize("hasAuthority('ShowTask')")
+	// @Cacheable(key = "#id", value = "Users")
+
 	public ResponseEntity<?> getUserTask(@PathVariable("id") int id) {
 		try {
 

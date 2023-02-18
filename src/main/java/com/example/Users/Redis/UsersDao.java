@@ -7,16 +7,12 @@ package com.example.Users.Redis;
 //
 //	@Autowired
 //	private CacheConfig cacheConfig;
-//	
-//	@Resource( )
-//	private HashOperations<Object, Object, Object> hashOperations;
 //
+//	@Autowired
 //	private RedisTemplate redisTemplate;
 //
-//	public Users save(Users dto) {
-//		hashOperations.put(HASH_KEY, dto.getId(), dto);
-//		redisTemplate.opsForHash().put();
-//		return dto;
+//	public List<UsersTask> getUserTask(int id) {
+//		return redisTemplate.opsForHash().values(HASH_KEY);
 //
 //	}
 //

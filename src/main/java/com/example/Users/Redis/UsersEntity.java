@@ -18,12 +18,6 @@ package com.example.Users.Redis;
 //
 //	private String password;
 //
-//	@CreationTimestamp
-//	private Timestamp Creationtime;
-//
-//	@UpdateTimestamp
-//	private Timestamp updationtime;
-//
 //	private boolean is_active = true;
 //
 //	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
@@ -102,17 +96,13 @@ package com.example.Users.Redis;
 //		this.password = password;
 //	}
 //
-//	public Timestamp getCreationtime() {
-//		return Creationtime;
+//	public UsersEntity() {
+//		super();
+//		// TODO Auto-generated constructor stub
 //	}
 //
-//	public void setCreationtime(Timestamp creationtime) {
-//		Creationtime = creationtime;
-//	}
-//
-//	public UsersEntity(int id, String name, String add, String city, String email, String password,
-//			Timestamp creationtime, Timestamp updationtime, boolean is_active, List<UsersTaskEntity> task,
-//			List<UserRoleEntity> role) {
+//	public UsersEntity(int id, String name, String add, String city, String email, String password, boolean is_active,
+//			List<UsersTaskEntity> task, List<UserRoleEntity> role, List<QueryPortal> qury) {
 //		super();
 //		this.id = id;
 //		this.name = name;
@@ -120,19 +110,18 @@ package com.example.Users.Redis;
 //		this.city = city;
 //		this.email = email;
 //		this.password = password;
-//		this.Creationtime = creationtime;
-//		this.updationtime = updationtime;
 //		this.is_active = is_active;
 //		this.task = task;
 //		this.role = role;
+//		this.qury = qury;
 //	}
 //
-//	public Timestamp getUpdationtime() {
-//		return updationtime;
+//	public List<QueryPortal> getQury() {
+//		return qury;
 //	}
 //
-//	public void setUpdationtime(Timestamp updationtime) {
-//		this.updationtime = updationtime;
+//	public void setQury(List<QueryPortal> qury) {
+//		this.qury = qury;
 //	}
 //
 //	public List<UsersTaskEntity> getTask() {
