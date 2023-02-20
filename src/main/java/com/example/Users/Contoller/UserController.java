@@ -43,7 +43,7 @@ public class UserController {
 
 	@PostMapping("/register")
 
-	public ResponseEntity<?> setUsers(@RequestBody UserDto users) {
+	public ResponseEntity<?> setUsers(@RequestBody UserDto users) throws Exception {
 
 		if (users.getName().isEmpty() == false && users.getEmail().isEmpty() == false
 				&& users.getPassword().isEmpty() == false) {
@@ -71,7 +71,7 @@ public class UserController {
 							new ErrorMessage(ErrorMessageConstant.INVALID_PASSWORD, ErrorMessageKey.USER_E031102),
 							HttpStatus.NOT_ACCEPTABLE);
 				}
-			} catch (Exception e) {
+			} catch (ResourceNotFoundException e) {
 				return new ResponseEntity<>(
 						new ErrorMessage(ErrorMessageConstant.NOT_STORED, ErrorMessageKey.USER_E031101),
 						HttpStatus.BAD_REQUEST);

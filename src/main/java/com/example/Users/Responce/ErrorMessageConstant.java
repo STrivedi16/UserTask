@@ -41,4 +41,6 @@ public class ErrorMessageConstant {
 
 	public static final String FILE_DATA_NOT_FETCHED = "file data not fetched";
 
+	public static final String USER_NOT_FOUND = "user  not found";
+
 }

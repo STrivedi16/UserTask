@@ -9,23 +9,35 @@ import com.example.Users.Config.CacheConfig;
 public class RedisService {
 
 	@Autowired
-	public CacheConfig cacheConfig;
+	private CacheConfig cc;
 
-	public Boolean isKeyExist(String key, Object hashKey) {
-		System.err.println("nfasiufasufnasfnasiofns");
-		return cacheConfig.redisTemplate().opsForHash().hasKey(key, hashKey);
+	
+
+	public RedisService() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void addInCache(String key, Object hashKey, Object value) {
-		cacheConfig.redisTemplate().opsForHash().put(key, hashKey, value);
+	public Boolean isKeyExist(String key1, String key2) {
+		return cc.redisTemplate().opsForHash().hasKey(key1, key2);
 	}
 
-	public Boolean addInCacheIfAbsent(String key, Object hashKey, Object value) {
-		return cacheConfig.redisTemplate().opsForHash().putIfAbsent(key, hashKey, value);
+	public void addInCache(String key1, String key2, Object val) {
+		cc.redisTemplate().opsForHash().put(key1, key2, val);
 	}
 
-	public Object getFromCache(String key, Object hashKey) {
-		return cacheConfig.redisTemplate().opsForHash().get(key, hashKey);
+	public Object getFromCache(String key1, String key2) {
+		return cc.redisTemplate().opsForHash().get(key1, key2);
+	}
+
+	public void removeKeyFromCache(String key) {
+		cc.redisTemplate().delete(key);
+		return;
+	}
+
+	public void removeAllKeysStartingWith() {
+		cc.connectionFactory().getConnection().flushAll();
+
 	}
 
 }

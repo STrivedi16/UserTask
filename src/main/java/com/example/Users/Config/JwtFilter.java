@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,8 @@ public class JwtFilter extends OncePerRequestFilter {
 	private CustomerUserDetailsService customerUserdetailsService;
 
 	public static int id = 0;
+	
+	Logger LOG=LoggerFactory.getLogger(JwtFilter.class);
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -74,8 +78,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		} else {
 
-			System.err.println("123- first in filter");
-			System.out.println("Your token is not valid ");
+			LOG.info("Your Token is not valid  ");
 		}
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null
@@ -95,7 +98,7 @@ public class JwtFilter extends OncePerRequestFilter {
 			SecurityContextHolder.getContext().setAuthentication(upat);
 
 		} else {
-			System.out.println("Username is not valid 12312 ");
+			LOG.info("user not valid");
 
 //			response.sendError(401, "Your Token Is Not Valid");
 		}

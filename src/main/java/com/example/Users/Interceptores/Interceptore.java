@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.example.Users.Config.JwtTokenUtil;
+import com.example.Users.Redis.RedisService;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.Service.UsersService;
 import com.example.Users.entity.UserRoleEntity;
@@ -30,6 +31,9 @@ public class Interceptore implements HandlerInterceptor {
 
 	@Autowired
 	private UsersService service;
+	
+	@Autowired
+	private RedisService redisService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -49,21 +53,39 @@ public class Interceptore implements HandlerInterceptor {
 
 			token = authHerader.substring(7);
 
-			System.out.println(token);
+			//System.out.println(token);
 			String username = this.jwtTokenUtil.getUsernameFromToken(token);
 			System.out.println(username);
 
 			Users users = this.repository.findByEmailIgnoreCase(username);
 
-			ArrayList<SimpleGrantedAuthority> permission = this.service.getAuthorities(users.getId());
-
-			List<UserRoleEntity> list = users.getRole();
-
-			System.err.println("Permission that get in interceptor" + permission);
-
-			request.setAttribute(username, list);
+//			ArrayList<SimpleGrantedAuthority> permission = this.service.getAuthorities(users.getId());
+//
+//			List<UserRoleEntity> list = users.getRole();
+//
+//			System.err.println("Permission that get in interceptor" + permission);
+//
+//			request.setAttribute(username, list);
+//			request.setAttribute("permission ", permission);
+			
+			ArrayList<SimpleGrantedAuthority> permission = null;
+			
+			
+			if(!redisService.isKeyExist(users.getId()+"permission", users.getId()+"permission"))
+			{
+				permission=this.service.getAuthorities(users.getId());
+				
+				System.err.println("cache in interceptor...");
+				redisService.addInCache(users.getId()+"permission",users.getId()+"permission", permission);
+			}
+			else {
+				
+				System.err.println("cache in interceptor...");
+				
+				permission=(ArrayList<SimpleGrantedAuthority>) redisService.getFromCache(users.getId()+"permission",users.getId()+"permission");
+			}
+			
 			request.setAttribute("permission ", permission);
-
 		}
 
 //		String username = request.getParameter("username");

@@ -20,9 +20,8 @@ public class ResponceEntityDeserializer extends StdDeserializer<ResponseEntity<?
 
 	protected ResponceEntityDeserializer(Class<?> vc) {
 		super(vc);
-		// TODO Auto-generated constructor stub
+	// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	public ResponseEntity<?> deserialize(JsonParser p, DeserializationContext ctxt)
 			throws IOException, JacksonException {

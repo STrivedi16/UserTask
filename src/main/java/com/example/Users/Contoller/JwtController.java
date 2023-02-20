@@ -17,6 +17,7 @@ import com.example.Users.Model.JwtRequest;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
+import com.example.Users.Responce.ResourceNotFoundException;
 import com.example.Users.Responce.SuccessMessageConstant;
 import com.example.Users.Responce.SuccessMessageKey;
 import com.example.Users.Responce.SuccessMessageToken;
@@ -64,7 +65,7 @@ public class JwtController {
 				this.authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
 
-			} catch (Exception e) {
+			} catch (ResourceNotFoundException e) {
 
 				return new ResponseEntity<>(
 						new ErrorMessage(ErrorMessageConstant.USERNAME_PASSWORD_INVALID, ErrorMessageKey.USER_E031100),
@@ -79,11 +80,11 @@ public class JwtController {
 
 		String reftoken = this.jwtRefreshToken.generatereftoken(details);
 
-		System.out.println(token);
-
-		System.out.println();
-
-		System.out.println(reftoken);
+//		System.out.println(token);
+//
+//		System.out.println();
+//
+//		System.out.println(reftoken);
 
 		return new ResponseEntity<>(
 				new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, token, reftoken),
