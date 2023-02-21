@@ -14,14 +14,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-
+@SQLDelete(sql = "update users set is_active=false where id=?")
+@Where(clause = "is_active=true")
 public class Users implements UserDetails {
 
 	@Id

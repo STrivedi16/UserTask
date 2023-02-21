@@ -38,9 +38,13 @@ public class ErrorMessageConstant {
 
 	// file not upload
 	public static final String FILE_NOT_UPLOADED = "filr not uploaded";
+	
+	public static final String FILE_NOT_FOUND="file not found";
 
 	public static final String FILE_DATA_NOT_FETCHED = "file data not fetched";
 
 	public static final String USER_NOT_FOUND = "user  not found";
+	
+	public static final String FILE_SIZE="file size must be between 1MB to 100MB";
 
 }

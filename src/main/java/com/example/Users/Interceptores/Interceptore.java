@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.Users.Config.JwtTokenUtil;
 import com.example.Users.Redis.RedisService;
@@ -92,6 +93,18 @@ public class Interceptore implements HandlerInterceptor {
 //
 //		System.out.println(username);
 		return HandlerInterceptor.super.preHandle(request, response, handler);
+	}
+	
+	
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		
+		LOG.info("postHandler interceptor invked.......{}:{}"+request.getRequestURL()+request.getMethod());
+			
+		
+		
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
 
 }

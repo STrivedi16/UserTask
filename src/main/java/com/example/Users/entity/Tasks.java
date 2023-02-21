@@ -8,7 +8,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Entity
+@SQLDelete(sql = "update tasks set is_active=false where id=?")
+@Where(clause = "is_active=true")
 public class Tasks {
 
 	@Id

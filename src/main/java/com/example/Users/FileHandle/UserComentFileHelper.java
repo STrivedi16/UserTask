@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UserComentFileHelper {
 
-	@Autowired
-	private UserComent coment;
+//	@Autowired
+//	private UserComent coment;
 
 	public static boolean checkFileFormat(MultipartFile file) {
 		if (file.getContentType().equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {

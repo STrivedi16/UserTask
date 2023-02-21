@@ -41,7 +41,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) {
 
 		System.err.println("andjknfsfbsfasfys");
-		ArrayList<SimpleGrantedAuthority> arrayList = null;
+		ArrayList<SimpleGrantedAuthority> permissions = null;
 		
 		Logger LOG=LoggerFactory.getLogger(CustomerUserDetailsService.class);
 		
@@ -93,7 +93,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
                 userEntity.setEmail((String) map.get("email"));
                 userEntity.setId(((Integer) map.get("id")));
             } catch (Exception e) {
-                System.out.println("EEOR " + e);
+                System.out.println("ERROR " + e);
             }
             System.out.println("JSON STRING 22 " + userEntity.toString());
         }
@@ -102,15 +102,16 @@ public class CustomerUserDetailsService implements UserDetailsService {
 
         if (userEntity != null) {
 
-			arrayList = this.service.getAuthorities(userEntity.getId());
+        	permissions = this.service.getAuthorities(userEntity.getId());
 
+        	System.out.println(permissions);
 		}
 
 		else {
 			throw new ResourceNotFoundException();
 		}
         return new org.springframework.security.core.userdetails.User(userEntity.getEmail(), userEntity.getPassword(),
-                arrayList);
+        		permissions);
     }
 		
 		

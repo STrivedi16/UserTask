@@ -40,4 +40,11 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 	@Query(value = "select u.name, u.city, u.add, u.email from users u", nativeQuery = true)
 
 	List<UserInterface> findAll(Class<UserInterface> class1);
+	
+	@Query(value = "select u.id, u.name, r.role, p.permissions from users u \r\n"
+			+ "join user_role_entity ure on u.id=ure.users_id\r\n"
+			+ "join roles r on r.id= ure.roles_id\r\n"
+			+ "join role_permission_entity rpe on r.id=rpe.roles1_id\r\n"
+			+ "join permissions p on p.id=rpe.permissions_id ORDER BY u.id ASC", nativeQuery = true)
+	List<UsersPermission> findall(Class<UsersPermission> class1);
 }

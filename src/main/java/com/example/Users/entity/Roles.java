@@ -12,11 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@SQLDelete(sql = "update roles set is_active=false where id=?")
+@Where(clause = "is_active=true")
 public class Roles {
 
 	@Id
