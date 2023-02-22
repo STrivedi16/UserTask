@@ -85,7 +85,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/{id}")
-	@Cacheable(key = "#id", value = "Users")
+	//@Cacheable(key = "#id", value = "Users")
 	public ResponseEntity<?> getData(@PathVariable("id") int id) throws Exception {
 		try {
 
