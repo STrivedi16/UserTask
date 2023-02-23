@@ -34,7 +34,7 @@ public class EmailService {
 	{
 		boolean f= false;
 		
-		String from="shubhamtrivedi@nimapinfotech.com";
+		String from="email";
 		
 		
 		
