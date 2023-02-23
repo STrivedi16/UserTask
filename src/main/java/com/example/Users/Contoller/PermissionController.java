@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Users.DTO.PermissionsDto;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
@@ -25,7 +26,7 @@ public class PermissionController {
 
 	@PostMapping("/permission")
 	@PreAuthorize("hasAuthority	('addPermission')")
-	public ResponseEntity<?> setPermission(@RequestBody Permissions permissions) {
+	public ResponseEntity<?> setPermission(@RequestBody PermissionsDto permissions) {
 		try {
 
 			Permissions permissions2 = this.service.setPermission(permissions);

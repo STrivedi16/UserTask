@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Users.Config.JwtFilter;
@@ -106,10 +107,14 @@ public class UserController {
 
 	@GetMapping("/useres")
 	@PreAuthorize("hasAuthority('getusers')")
-	public ResponseEntity<?> getAllData() {
+	public ResponseEntity<?> getAllData(
+			@RequestParam(name = "pagenumber" , defaultValue = "0", required = false)Integer pagenumber,
+			@RequestParam(name="pagesize",defaultValue = "5",required =false)Integer pagesize)
+		
+	{
 		try {
 
-			List<UserInterface> list = this.service.getAll();
+			List<UserInterface> list = this.service.getAll(pagesize, pagenumber);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.USER_DETAIL, SuccessMessageKey.USER_M031102, list),

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
@@ -61,8 +64,15 @@ public class UsersService {
 		return this.repository.findById(id).orElseThrow(() -> new Exception("user not found"));
 	}
 
-	public List<UserInterface> getAll() {
-		return this.repository.findAll(UserInterface.class);
+	public List<UserInterface> getAll(Integer pagesize, Integer pagenumber) {
+		
+		Pageable pageable=PageRequest.of(pagenumber, pagesize);
+		
+		Page<UserInterface> page=this.repository.findAll(pageable,UserInterface.class);
+		
+		
+		
+		return page.getContent();
 	}
 
 	public List<UsersTask> getUserTask(int id) {
@@ -80,5 +90,7 @@ public class UsersService {
 	public List<UserTaskReview> showTaskReviewForAdmin(int id) {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
+	
+
 
 }

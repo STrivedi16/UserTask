@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Users.DTO.TaskDto;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
@@ -25,11 +26,11 @@ public class TaskController {
 
 	@PostMapping("/task")
 	@PreAuthorize("hasAuthority('setTask')")
-	public ResponseEntity<?> setTask(@RequestBody Tasks tasks) {
+	public ResponseEntity<?> setTask(@RequestBody TaskDto dto) {
 
 		try {
 
-			Tasks tasks2 = this.service.setTask(tasks);
+			Tasks tasks2 = this.service.setTask(dto);
 
 			return new ResponseEntity<>(
 					new Success(SuccessMessageConstant.TASK_ADD, SuccessMessageKey.TASK_M031201, tasks2),

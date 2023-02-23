@@ -8,23 +8,8 @@ public class UsertaskDto {
 
 	private Integer taskid;
 
-	private Status status;
-
-	public UsertaskDto(Integer userid, Integer taskid, Status status) {
-		super();
-		this.userid = userid;
-		this.taskid = taskid;
-		this.status = status;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
+	
+	
 	public Integer getUserid() {
 		return userid;
 	}

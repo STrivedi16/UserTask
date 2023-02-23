@@ -2,6 +2,8 @@ package com.example.Users.Repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -47,4 +49,8 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 			+ "join role_permission_entity rpe on r.id=rpe.roles1_id\r\n"
 			+ "join permissions p on p.id=rpe.permissions_id ORDER BY u.id ASC", nativeQuery = true)
 	List<UsersPermission> findall(Class<UsersPermission> class1);
+
+	@Query(value = "select u.name, u.city, u.add, u.email from users u", nativeQuery = true)
+
+	Page<UserInterface> findAll(Pageable pageable, Class<UserInterface> class1);
 }

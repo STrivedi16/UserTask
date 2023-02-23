@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.Users.Repository.TaskRepository;
 import com.example.Users.Repository.UserTaskRepo;
 import com.example.Users.Repository.UsersRepository;
+import com.example.Users.entity.Status;
 import com.example.Users.entity.Tasks;
 import com.example.Users.entity.Users;
 import com.example.Users.entity.UsersTaskEntity;
@@ -34,7 +35,7 @@ public class UserTaskService {
 
 		entity.setTasks(tasks);
 
-		entity.setStatus(dto.getStatus());
+		entity.setStatus(Status.TO_DO);
 
 		return this.userTaskRepo.save(entity);
 	}

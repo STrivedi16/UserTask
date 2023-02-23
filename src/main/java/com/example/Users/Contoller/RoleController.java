@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Users.DTO.RoleDto;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
@@ -25,7 +26,7 @@ public class RoleController {
 
 	@PostMapping("/role")
 	@PreAuthorize("hasAuthority	('setRole')")
-	public ResponseEntity<?> setRoles(@RequestBody Roles roles) {
+	public ResponseEntity<?> setRoles(@RequestBody RoleDto roles) {
 		try {
 			Roles roles2 = this.roleService.setRole(roles);
 
