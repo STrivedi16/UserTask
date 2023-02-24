@@ -14,7 +14,10 @@ public class SuccessMessageKey {
 	public static final String USER_TASK_REVIEW = "14";
 	public static final String STAUS = "19";
 	public static final String FILE = "20";
+	public static final String OTP="21";
+	
 
+	public static final String OTP_M032101=HEADER+OTP+"01";
 	public static final String LOGIN_M031100 = HEADER + USER + "00";// login
 	public static final String USER_M031101 = HEADER + USER + "01";// STORED
 	public static final String USER_M031102 = HEADER + USER + "02";// USER DETAILS FETCHED

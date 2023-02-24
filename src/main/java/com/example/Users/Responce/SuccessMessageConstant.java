@@ -26,5 +26,8 @@ public class SuccessMessageConstant {
 
 	public static final String FILE_UPLOAD = "file uploaded successfully";
 	public static final String FILE_FETCHED = "file data fetched successfully";
+	
+	public static final String OTP_SENT="OTP sent successfull";
+	
 
 }

@@ -40,7 +40,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 
-		System.err.println("andjknfsfbsfasfys");
+		
 		ArrayList<SimpleGrantedAuthority> permissions = null;
 		
 		Logger LOG=LoggerFactory.getLogger(CustomerUserDetailsService.class);
@@ -77,6 +77,9 @@ public class CustomerUserDetailsService implements UserDetailsService {
 		
 		Users userEntity = new Users();
         if (!redisService.isKeyExist(username, username)) {
+        	
+        
+        	
             userEntity = this.repository.findByEmailIgnoreCase(username);
             LOG.info("get from database");
             redisService.addInCache(username, username, userEntity.toString());

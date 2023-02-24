@@ -24,7 +24,7 @@ public class UsersService {
 	@Autowired
 	private UsersRepository repository;
 
-	private static final String HASH_KEY = "Users";
+	//private static final String HASH_KEY = "Users";
 
 	public Users register(UserDto users) throws Exception {
 		Users usersdata = this.repository.findByEmailIgnoreCase(users.getEmail());

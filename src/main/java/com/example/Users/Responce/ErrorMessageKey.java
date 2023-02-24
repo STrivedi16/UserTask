@@ -15,7 +15,12 @@ public class ErrorMessageKey {
 	public static final String USER_TASK_REVIEW = "14";
 	public static final String STAUS = "19";
 	public static final String FILE = "20";
+	public static final String OTP="21";
+	
+	
 
+	//otp
+	public static final String OTP_E032101=HEADER+OTP+"01";// otp not sent
 	// http request
 	public static final String REQUEST_E0301 = HEADER + "01";
 

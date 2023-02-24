@@ -1,5 +1,6 @@
 package com.example.Users.Service;
 
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -28,13 +29,14 @@ public class EmailService {
 	private String host;
 	
 	
+	
 	@Value("${spring.mail.port}")
 	private int port;
 	public boolean sendEmail(String subject, String message, String to)
 	{
 		boolean f= false;
 		
-		String from="email";
+		String from="username";
 		
 		
 		
