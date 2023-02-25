@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,8 @@ public class CacheConfig {
 
 	private Logger LOG = LoggerFactory.getLogger(CacheConfig.class);
 
-	
+	@Value("${spring.redis.port}")
+	private int port;
 	
 	public CacheConfig() {
 		super();
@@ -44,7 +46,7 @@ public class CacheConfig {
 		
 		LOG.info("Caching is invoked... ");
 		configuration.setHostName("localhost");
-		configuration.setPort(6379);
+		configuration.setPort(port);
 		return new LettuceConnectionFactory(configuration);
 
 	}

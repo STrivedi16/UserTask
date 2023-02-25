@@ -55,7 +55,7 @@ public class LoginWithOtp {
 			
 			if(otp==null)
 			{
-				return new ResponseEntity<>(new ErrorMessage("Error", "Error"),HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.LOGIN_FAIL, ErrorMessageKey.USER_E031100),HttpStatus.BAD_REQUEST);
 			}
 			
 			String email=otp.getEmail();
