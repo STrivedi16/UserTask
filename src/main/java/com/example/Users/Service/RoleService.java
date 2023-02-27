@@ -17,12 +17,14 @@ public class RoleService {
 //		return this.repository.save(roles);
 //	}
 	
-	public Roles setRole(RoleDto dto)
+	public RoleDto setRole(RoleDto dto)
 	{
 		Roles roles=new Roles();
 		roles.setRole(dto.getRole());
 		
-		return this.repository.save(roles);
+		this.repository.save(roles);
+		
+		return dto;
 	}
 
 }

@@ -34,6 +34,7 @@ public class ErrorMessageKey {
 	public static final String USER_E031103 = HEADER + USER + "03";// // INVALID USERNME OR PASSWORD
 	public static final String USER_E031104 = HEADER + USER + "04";// INVLAID TOKEN
 	public static final String USER_E031105 = HEADER + USER + "05";// user not get
+	public static final String USER_E031106=HEADER+USER+"06"; //invalid email id 
 
 	// TASK
 	public static final String TASK_E031201 = HEADER + TASK + "01";// TASK NOT STORED

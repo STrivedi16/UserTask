@@ -2,6 +2,8 @@ package com.example.Users.Responce;
 
 import java.util.NoSuchElementException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +14,17 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.example.Users.Exception.ErrorException;
+
 @RestControllerAdvice
 public class GlobalExcaptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<ApiResponce> resourceNotFound(ResourceNotFoundException exception) {
+	public ResponseEntity<?> resourceNotFound(ResourceNotFoundException exception,HttpServletRequest request) {
 		String message = exception.getMessage();
-		ApiResponce apiResponce = new ApiResponce(message, false);
-		return new ResponseEntity<ApiResponce>(apiResponce, HttpStatus.NOT_FOUND);
+		StringBuffer key=request.getRequestURL();
+		
+		return new ResponseEntity<>(new ErrorException(message, key),HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
@@ -37,11 +42,11 @@ public class GlobalExcaptionHandler extends ResponseEntityExceptionHandler {
 				HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(NullPointerException.class)
-	public ResponseEntity<?> handleNullPointer(NullPointerException exception) {
-		return new ResponseEntity<>(new ErrorMessage("Null pointer ", "Error"), HttpStatus.BAD_REQUEST);
-	}
-	
+//	@ExceptionHandler(NullPointerException.class)
+//	public ResponseEntity<?> handleNullPointer(NullPointerException exception) {
+//		return new ResponseEntity<>(new ErrorMessage("Not get value ", "Error"), HttpStatus.BAD_REQUEST);
+//	}
+//	
 	
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ResponseEntity<?> fileSizeException(MaxUploadSizeExceededException exception)

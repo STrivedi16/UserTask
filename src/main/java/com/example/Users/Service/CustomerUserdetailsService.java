@@ -81,6 +81,10 @@ public class CustomerUserDetailsService implements UserDetailsService {
         
         	
             userEntity = this.repository.findByEmailIgnoreCase(username);
+            if(userEntity ==null)
+            {
+            	throw new ResourceNotFoundException();
+            }
             LOG.info("get from database");
             redisService.addInCache(username, username, userEntity.toString());
         } 

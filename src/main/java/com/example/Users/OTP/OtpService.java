@@ -6,6 +6,9 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.http.HttpResponse;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ public class OtpService {
 	private OtpRepository otpRepository	;
 	
 	
+	private SendOtp otp=new SendOtp();;
 	
 	public static  int generateOtp()
 	{
@@ -33,11 +37,36 @@ public class OtpService {
 	
 	public static int newotp=OtpService.generateOtp();
 	
+//	public static long currentTimeMillis=System.currentTimeMillis();
+//	public  static final long OTP_VALIDATION_TIME=5*60*1000;
+//	public static Date otpRequestedTimeMillis=S;
+//	public static long otpReqTime=otpRequestedTimeMillis.getTime();
+//	
+//	public static boolean isOtpValidate()
+//	{
+//
+//		if(OTP_VALIDATION_TIME+otpReqTime< currentTimeMillis)
+//		{
+//			return false;
+//			
+//		}
+//		return true;
+//	}
+	
+
+	
+	
 	public SendOtp setOtpForVerify(String email)
 	{
+		Calendar calendar=Calendar.getInstance();
+		calendar.add(Calendar.MINUTE, 5);
+		
 		SendOtp otp=new SendOtp();
 		otp.setEmail(email);
 		otp.setOtp(newotp);
+		
+		otp.setOtpReqestTime(calendar.getTime());
+		
 		
 		return this.otpRepository.save(otp);
 		
@@ -85,16 +114,18 @@ public class OtpService {
 //		
 //		String url="https://www.fast2sms.com/dev/bulkV2?authorization="+apikey+"&variables_values="+message+"&route=otp&numbers="+mobilenumber;
 //		
-//		URL url2=new URL(url);
-//		
+	
+	
+//	URL url2=new URL(url);
+///		
 //		HttpURLConnection con= (HttpURLConnection) url2.openConnection();
-//		
-//		con.setRequestMethod("GET");
-//		
-//		con.setRequestProperty("User-Agent", "Mozilla/5.0");
-//		con.setRequestProperty("cache-control", "no-cache");
+///		
+///		con.setRequestMethod("GET");
+///		
+//	con.setRequestProperty("User-Agent", "Mozilla/5.0");
+//	con.setRequestProperty("cache-control", "no-cache");
 //		
 //		int code=con.getResponseCode();
-//		
+//	
 //	}
 }

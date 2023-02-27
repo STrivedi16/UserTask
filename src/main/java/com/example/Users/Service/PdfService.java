@@ -21,6 +21,8 @@ import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.FontMapper;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 @Service
@@ -43,17 +45,22 @@ public class PdfService {
 		try {
 			
 			PdfWriter.getInstance(document, outputStream);
+			 
+           
+ 
 			
 			document.open();
 			
 			Font font =FontFactory.getFont(FontFactory.HELVETICA_BOLD,25);
 			Paragraph paragraph=new Paragraph(title,font);
+			
 			paragraph.setAlignment(Element.ALIGN_CENTER);
 			
 			document.add(paragraph);
 			
 			Font peraFont=FontFactory.getFont(FontFactory.HELVETICA);
 			Paragraph paragraph2=new Paragraph(content,peraFont);
+			paragraph2.setAlignment(Element.TABLE);
 			document.add(paragraph2);
 			
 			document.close();
@@ -110,19 +117,24 @@ public class PdfService {
 		
 		Document  document=new Document();
 		
+		PdfPTable table=new PdfPTable(5);
+		
+		table.setWidthPercentage(100f);
+		table.setSpacingBefore(10);
 		
 		
 			String title=name+" All Tasks";	
 			try {
 				
 PdfWriter.getInstance(document, arrayOutputStream);
+
 				
 				document.open();
 				
 				Font font=FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 				Paragraph paragraph=new Paragraph(title,font);
 				paragraph.setAlignment(Element.ALIGN_CENTER);
-				
+				//paragraph.add(Element.HEADER, paragraph.get(id));
 				document.add(paragraph);
 				
 				
@@ -132,10 +144,14 @@ PdfWriter.getInstance(document, arrayOutputStream);
 			
 				try {
 					Font taskfont=FontFactory.getFont(FontFactory.TIMES_ROMAN);
-					Paragraph paragraph2=new Paragraph(comments,taskfont);
-					paragraph2.setAlignment(Element.ALIGN_MIDDLE);
+//					Paragraph paragraph2=new Paragraph(comments,taskfont);
+//					paragraph2.setAlignment(Element.TABLE);
 					
-					document.add(paragraph2);
+					table.addCell("Task = "+eachTask[i]);
+					
+					table.addCell(" Status of task=  "+statusOfTask[i]);
+					
+					document.add(table);
 				}
 				catch (Exception e) {
 					e.printStackTrace();

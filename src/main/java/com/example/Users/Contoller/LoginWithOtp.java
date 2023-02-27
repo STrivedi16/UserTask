@@ -1,5 +1,9 @@
 package com.example.Users.Contoller;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,28 +57,46 @@ public class LoginWithOtp {
 			
 			SendOtp otp=this.otpService.findEmail(dto.getEmail(), dto.getOtp());
 			
-			if(otp==null)
+
+			
+			Date date = new Date();
+			Timestamp ts = new Timestamp(date.getTime());
+			
+			if(ts.compareTo(otp.getOtpReqestTime())==-1)
 			{
-				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.LOGIN_FAIL, ErrorMessageKey.USER_E031100),HttpStatus.BAD_REQUEST);
+
+				if(otp==null)
+				{
+					return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.LOGIN_FAIL, ErrorMessageKey.USER_E031100),HttpStatus.BAD_REQUEST);
+				}
+				
+				String email=otp.getEmail();
+				
+				
+				Users users=this.repository.findByEmailIgnoreCase(email);
+				
+				
+					
+				UserDetails details=this.customerUserDetailsService.loadUserByUsername(email);
+				
+				String accessToken=this.jwtTokenUtil.generateToken(details);
+				
+				
+				String refreshtoken=this.jwtRefreshToken.generatereftoken(details);
+				
+				this.otpService.clearOtp(dto.getEmail(), dto.getOtp());
+				
+				return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, accessToken, refreshtoken),HttpStatus.OK);
+				
 			}
 			
-			String email=otp.getEmail();
+			else {
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.LOGIN_FAIL, ErrorMessageKey.USER_E031100),HttpStatus.BAD_REQUEST);
+
+			}
 			
 			
-			Users users=this.repository.findByEmailIgnoreCase(email);
 			
-			
-				
-			UserDetails details=this.customerUserDetailsService.loadUserByUsername(email);
-			
-			String accessToken=this.jwtTokenUtil.generateToken(details);
-			
-			
-			String refreshtoken=this.jwtRefreshToken.generatereftoken(details);
-			
-			this.otpService.clearOtp(dto.getEmail(), dto.getOtp());
-			
-			return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, accessToken, refreshtoken),HttpStatus.OK);
 			
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.LOGIN_FAIL, ErrorMessageKey.USER_E031100),HttpStatus.BAD_REQUEST);

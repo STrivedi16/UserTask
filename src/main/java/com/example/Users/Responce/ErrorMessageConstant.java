@@ -9,6 +9,7 @@ public class ErrorMessageConstant {
 	
 	//Otp not sent
 	public static final String OTP_SENT_FAIL="otp not sent ";
+	
 
 	public static final String USERNAME_PASSWORD_INVALID = "invalid username or password";
 	public static final String INVALID_TOKEN = "invalid token";

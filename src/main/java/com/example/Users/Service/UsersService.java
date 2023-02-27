@@ -16,6 +16,7 @@ import com.example.Users.Interface.UserTaskReview;
 import com.example.Users.Interface.UsersPermission;
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Repository.UsersRepository;
+import com.example.Users.entity.TempUserDto;
 import com.example.Users.entity.Users;
 
 @Service
@@ -26,20 +27,29 @@ public class UsersService {
 
 	//private static final String HASH_KEY = "Users";
 
-	public Users register(UserDto users) throws Exception {
-		Users usersdata = this.repository.findByEmailIgnoreCase(users.getEmail());
+	public TempUserDto register(TempUserDto d) throws Exception {
+		
+		System.err.println(d.getEmail());
+		System.err.println("way to get email");
+		
+		Users usersdata = this.repository.findByEmailIgnoreCase(d.getEmail());
+		
+		System.err.println(usersdata );
+		
 
 		if (usersdata != null)
 			throw new Exception("user data  already stored");
 
 		Users newusers = new Users();
-		newusers.setName(users.getName());
-		newusers.setEmail(users.getEmail());
-		newusers.setPassword(users.getPassword());
-		newusers.setAdd(users.getAddress());
-		newusers.setCity(users.getCity());
+		newusers.setName(d.getName());
+		newusers.setEmail(d.getEmail());
+		newusers.setPassword(d.getPassword());
+		newusers.setAdd(d.getAddress());
+		newusers.setCity(d.getCity());
+		
+		this.repository.save(newusers);
 
-		return this.repository.save(newusers);
+		return d;
 	}
 
 	public ArrayList<SimpleGrantedAuthority> getAuthorities(int id) {

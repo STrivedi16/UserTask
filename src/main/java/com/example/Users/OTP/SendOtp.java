@@ -26,17 +26,30 @@ public class SendOtp {
 	
 	private long moblie;
 	
-	private static final long OTP_VALIDATION_TIME=5*60*1000;
+	//public  static final long OTP_VALIDATION_TIME=5*60*1000;
 	
-	private Date otpReqestTime;
+	
+	private  static  java.util.Date otpReqestTime;
 	
 	@CreationTimestamp
-	private Timestamp creationTime;
+	public  Timestamp creationTime;
 	
 	@UpdateTimestamp
 	private Timestamp updationTime;
 
 	
+
+	
+	
+	
+
+	public static java.util.Date getOtpReqestTime() {
+		return otpReqestTime;
+	}
+
+	public static void setOtpReqestTime(java.util.Date date) {
+		SendOtp.otpReqestTime = date;
+	}
 
 	public int getSendOtpid() {
 		return sendOtpid;
@@ -70,13 +83,7 @@ public class SendOtp {
 		this.moblie = moblie;
 	}
 
-	public Date getOtpReqestTime() {
-		return otpReqestTime;
-	}
-
-	public void setOtpReqestTime(Date otpReqestTime) {
-		this.otpReqestTime = otpReqestTime;
-	}
+	
 
 	public Timestamp getCreationTime() {
 		return creationTime;
@@ -94,20 +101,19 @@ public class SendOtp {
 		this.updationTime = updationTime;
 	}
 
-	public static long getOtpValidationTime() {
-		return OTP_VALIDATION_TIME;
-	}
+	
 
 	
 
-	public SendOtp(int sendOtpid, int otp, String email, long moblie, Date otpReqestTime, Timestamp creationTime,
-			Timestamp updationTime) {
+	
+	
+
+	public SendOtp(int sendOtpid, int otp, String email, long moblie, Timestamp creationTime, Timestamp updationTime) {
 		super();
 		this.sendOtpid = sendOtpid;
 		this.otp = otp;
 		this.email = email;
 		this.moblie = moblie;
-		this.otpReqestTime = otpReqestTime;
 		this.creationTime = creationTime;
 		this.updationTime = updationTime;
 	}

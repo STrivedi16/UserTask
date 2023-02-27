@@ -62,6 +62,7 @@ public class JwtController {
 
 			try {
 
+				
 				this.authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
 

@@ -31,7 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/webjars/**",
 			"/forgot",
 			"/loginwithOTP"
-			,"/mobile"
+			,"/mobile",
+"/registerOtp"
 	};
 	
 	

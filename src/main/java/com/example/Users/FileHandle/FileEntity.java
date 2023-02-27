@@ -20,6 +20,7 @@ public class FileEntity {
 	private String type;
 
 	@Lob // it specifies that the database should stored the property as large object
+	// is it used when if you want to store any binary format in DB;
 	@Column(length = 1000)
 	private byte[] imagedata;
 

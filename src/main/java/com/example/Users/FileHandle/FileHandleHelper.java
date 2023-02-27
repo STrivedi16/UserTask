@@ -1,5 +1,6 @@
 package com.example.Users.FileHandle;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,5 +41,7 @@ public class FileHandleHelper {
 
 		return f;
 	}
+	
+	//public ByteArrayOutputStream downloadFile()
 
 }

@@ -36,7 +36,7 @@ public class EmailService {
 	{
 		boolean f= false;
 		
-		String from="username";
+		String from="email";
 		
 		
 		
@@ -63,7 +63,7 @@ public class EmailService {
 				
 				return  new  PasswordAuthentication("username", "password");
 			}
-		
+	
 			
 		});
 		

@@ -64,13 +64,13 @@ public class EmailOtpController {
 			if(email.isEmpty())
 			{
 			
-				return new ResponseEntity<>(new ErrorMessage("Email is empty", "Empty email"),HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.INVALID_EMAIL, ErrorMessageKey.USER_E031106),HttpStatus.BAD_REQUEST);
 			}
 			Users users=this.usersRepository.findByEmailIgnoreCase(email);
 			
 			if(users ==null)
 			{
-				return new ResponseEntity<>(new ErrorMessage("Your email is not valid ", "Your are not register"),HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.INVALID_EMAIL, ErrorMessageKey.USER_E031106),HttpStatus.BAD_REQUEST);
 			}
 			
 			String message="OTP = "+otpService.newotp;
