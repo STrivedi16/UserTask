@@ -32,7 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/forgot",
 			"/loginwithOTP"
 			,"/mobile",
-"/registerOtp"
+			"/registerOtp",
+			"/generatetoken",
+			
+			"/userTaskPdf/{id}",
+			"/templates/generatePdf",
+			"/generatePdf.html",
+		
+			"/templates/generatePdf.html"
+
 	};
 	
 	

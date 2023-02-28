@@ -8,6 +8,8 @@ import java.net.URLEncoder;
 import java.net.http.HttpResponse;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -38,7 +40,7 @@ public class OtpService {
 	public static int newotp=OtpService.generateOtp();
 	
 //	public static long currentTimeMillis=System.currentTimeMillis();
-//	public  static final long OTP_VALIDATION_TIME=5*60*1000;
+	public  static final long OTP_VALIDATION_TIME=5*60*1000;
 //	public static Date otpRequestedTimeMillis=S;
 //	public static long otpReqTime=otpRequestedTimeMillis.getTime();
 //	
@@ -58,19 +60,28 @@ public class OtpService {
 	
 	public SendOtp setOtpForVerify(String email)
 	{
-		Calendar calendar=Calendar.getInstance();
-		calendar.add(Calendar.MINUTE, 5);
+//		Calendar calendar=Calendar.getInstance();
+//		calendar.add(Calendar.MINUTE, 5);
+
+//		Date date=new Date(System.currentTimeMillis());
+		
+		
+		LocalDateTime expirationtime=LocalDateTime.now().plus(OTP_VALIDATION_TIME,ChronoUnit.MINUTES);
 		
 		SendOtp otp=new SendOtp();
 		otp.setEmail(email);
 		otp.setOtp(newotp);
 		
-		otp.setOtpReqestTime(calendar.getTime());
+		otp.setOtpReqestTime(expirationtime);
 		
 		
 		return this.otpRepository.save(otp);
 		
 	}
+	
+	public boolean isOtpExpired(LocalDateTime expirationTime) {
+        return LocalDateTime.now().isAfter(expirationTime);
+    }
 	
 	public SendOtp clearOtp(String email, int otp)
 	{
@@ -92,9 +103,12 @@ public class OtpService {
 	public SendOtp findEmail(String email, int otp) throws Exception
 	{
 		
+		System.err.println(email+" "+otp);
 		
 		
 		SendOtp otp2=this.otpRepository.findByEmailIgnoreCaseAndOtp(email, otp);
+		
+		System.err.println("addmslidmadlamdalddkmldkamsldkmasldkasldkasmdkmasd");
 		
 		if(otp2==null)
 		{

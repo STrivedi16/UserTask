@@ -72,8 +72,11 @@ public class EmailOtpController {
 			{
 				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.INVALID_EMAIL, ErrorMessageKey.USER_E031106),HttpStatus.BAD_REQUEST);
 			}
+			//OTP = "+otpService.newotp
+			String message="<h3>Hello "+ " "+users.getName() +"</h3><br>"+"<h2> OTP"+" "+otpService.newotp+"</h2> <br>"
+					+"<p><h6>this otp is for vrtification </h6></p>"
+					+"<p><h6>this is auto generated mail please do not replay on this mail</h6></p>";
 			
-			String message="OTP = "+otpService.newotp;
 			
 			String subject="OTP for verification";
 			to=email;

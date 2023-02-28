@@ -36,7 +36,7 @@ public class EmailService {
 	{
 		boolean f= false;
 		
-		String from="email";
+		String from="username";
 		
 		
 		
@@ -77,8 +77,8 @@ public class EmailService {
 			message2.setFrom(from);
 			message2.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message2.setSubject(subject);
-			message2.setText(message);
-			
+			//message2.setText(message);
+			message2.setContent(message, "text/html");
 			
 			//step 3: send the message using transport class 	
 			Transport.send(message2);

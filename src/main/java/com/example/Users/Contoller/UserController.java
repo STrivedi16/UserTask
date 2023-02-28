@@ -1,6 +1,7 @@
 package com.example.Users.Contoller;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -280,13 +281,12 @@ public class UserController {
 			
 			SendOtp otp=this.otpService.findEmail(dto.getEmail(), dto.getOtp());
 			
-			System.err.println("11313123123123");
-
+		
 			
-			Date date = new Date();
-			Timestamp ts = new Timestamp(date.getTime());
+//			Date date = new Date();
+//			Timestamp ts = new Timestamp(date.getTime());
 			
-			if(ts.compareTo(otp.getOtpReqestTime())==-1)
+			if(otpService.isOtpExpired(LocalDateTime.now())==false)
 			{
 
 				if(otp==null)
@@ -320,7 +320,7 @@ public class UserController {
 		finally {
 			this.database.clearDto(user.getEmail());
 			
-			System.err.println("user data adaldnasda");
+			
 			
 		otpService.clearOtp(dto.getEmail(), dto.getOtp());
 		}

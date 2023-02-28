@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1>Hello</h1>
+    </center>
+    <img th:src="@{/nimaplogo.jfif}" alt="nimap logo">
+    <table>
+        <tr>
+            <th>User Name:</th>
+            <td th:text="${name}"></td>
+        </tr>
+        <tr>
+            <td>User Task:</td>
+            <td>Crud Operation</td>
+        </tr>
+    </table>
+</body>
+</html>
+<!--  Note that I've added the th namespace to the <html> tag, and I've replaced the src attribute of the <img> tag with a Thymeleaf expression that resolves to the correct path using the @{} syntax.
+-->
+
+
+

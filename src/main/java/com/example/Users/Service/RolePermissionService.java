@@ -36,5 +36,13 @@ public class RolePermissionService {
 
 		return this.repository.save(entity);
 	}
+	
+	public String deleteRolePermission(int id)
+	{
+		this.repository.deleteById(id);
+		
+		return "Your role permission is deleted";
+		
+	}
 
 }

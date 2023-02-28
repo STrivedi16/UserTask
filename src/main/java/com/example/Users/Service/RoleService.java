@@ -26,5 +26,12 @@ public class RoleService {
 		
 		return dto;
 	}
+	
+	public String deleteRole(int roleid)
+	{
+		this.repository.deleteById(roleid);
+	
+		return "Your Role is deleted";
+	}
 
 }

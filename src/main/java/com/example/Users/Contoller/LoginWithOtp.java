@@ -1,6 +1,7 @@
 package com.example.Users.Contoller;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -54,16 +55,23 @@ public class LoginWithOtp {
 	public ResponseEntity<?> loginWithOtp(@RequestBody LoginOtpDto dto)
 	{
 		try {
+			System.err.print("otp aviyo");
 			
 			SendOtp otp=this.otpService.findEmail(dto.getEmail(), dto.getOtp());
 			
+			
 
 			
-			Date date = new Date();
-			Timestamp ts = new Timestamp(date.getTime());
 			
-			if(ts.compareTo(otp.getOtpReqestTime())==-1)
+//			Date date = new Date();
+//			Timestamp ts = new Timestamp(date.getTime());
+			
+//			java.sql.Date date=new java.sql.Date(System.currentTimeMillis());
+			
+			if(otpService.isOtpExpired(LocalDateTime.now())==false)
 			{
+				
+				
 
 				if(otp==null)
 				{
@@ -72,10 +80,11 @@ public class LoginWithOtp {
 				
 				String email=otp.getEmail();
 				
+				System.err.println(" user data have malse");
 				
 				Users users=this.repository.findByEmailIgnoreCase(email);
 				
-				
+				System.out.println();
 					
 				UserDetails details=this.customerUserDetailsService.loadUserByUsername(email);
 				
