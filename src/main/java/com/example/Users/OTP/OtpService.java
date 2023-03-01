@@ -40,7 +40,7 @@ public class OtpService {
 	public static int newotp=OtpService.generateOtp();
 	
 //	public static long currentTimeMillis=System.currentTimeMillis();
-	public  static final long OTP_VALIDATION_TIME=5*60*1000;
+	public  static final long OTP_VALIDATION_TIME=5;
 //	public static Date otpRequestedTimeMillis=S;
 //	public static long otpReqTime=otpRequestedTimeMillis.getTime();
 //	
@@ -64,19 +64,37 @@ public class OtpService {
 //		calendar.add(Calendar.MINUTE, 5);
 
 //		Date date=new Date(System.currentTimeMillis());
+		SendOtp sendOtp=this.otpRepository.findByEmailIgnoreCase(email);
 		
 		
 		LocalDateTime expirationtime=LocalDateTime.now().plus(OTP_VALIDATION_TIME,ChronoUnit.MINUTES);
 		
+		System.err.println(expirationtime);
+		
+		if(sendOtp !=null)
+		{
 		SendOtp otp=new SendOtp();
-		otp.setEmail(email);
+		otp.setSendOtpid(sendOtp.getSendOtpid());
+		otp.setEmail(sendOtp.getEmail());
 		otp.setOtp(newotp);
 		
-		otp.setOtpReqestTime(expirationtime);
+		otp.setOtpRequestTime(expirationtime);
 		
 		
 		return this.otpRepository.save(otp);
-		
+		}
+		else
+		{
+			SendOtp otp=new SendOtp();
+			
+			otp.setEmail(email);
+			otp.setOtp(newotp);
+			
+			otp.setOtpRequestTime(expirationtime);
+			
+			
+			return this.otpRepository.save(otp);
+		}
 	}
 	
 	public boolean isOtpExpired(LocalDateTime expirationTime) {
@@ -90,10 +108,11 @@ public class OtpService {
 		
 		
 		otp2.setOtp(0);
-		otp2.setEmail(null);
+		
 		otp2.setCreationTime(null);
 		otp2.setMoblie(0);
 		otp2.setUpdationTime(null);
+		otp2.setOtpRequestTime(null);
 		
 		
 		return this.otpRepository.save(otp2);

@@ -5,26 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        footer {
+            font-size: 0.8em;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
+    <img th:src="${image}" alt="logo" style="width: 25%;">
     <center>
-        <h1>Hello</h1>
+        <h1 th:text="'Hello ' + ${name}" style="display: block;"></h1>
+        <hr>
     </center>
-    <img th:src="@{/nimaplogo.jfif}" alt="nimap logo">
-    <table>
+    <h4>Here is your task and its Status</h4>
+    <table border="5" align="center">
         <tr>
-            <th>User Name:</th>
-            <td th:text="${name}"></td>
+            <th>Task</th>
+            <th>Status</th>
         </tr>
         <tr>
-            <td>User Task:</td>
-            <td>Crud Operation</td>
+            <td th:text="${task}"></td>
+            <td th:text="${status}"></td>
         </tr>
     </table>
+    <footer>
+        <table>
+            <tr>
+                <td>SMT pvt. Ltd.</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>If any query contact Tech Lead</p>
+                </td>
+            </tr>
+        </table>
+    </footer>
 </body>
 </html>
-<!--  Note that I've added the th namespace to the <html> tag, and I've replaced the src attribute of the <img> tag with a Thymeleaf expression that resolves to the correct path using the @{} syntax.
--->
-
-
-

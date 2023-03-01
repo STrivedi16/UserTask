@@ -9,4 +9,6 @@ public interface OtpRepository extends JpaRepository<SendOtp, Long>{
 	
 	SendOtp findByEmailIgnoreCaseAndOtp(String email, int otp);
 	
+	SendOtp findByEmailIgnoreCase(String email);
+	
 }

@@ -30,7 +30,7 @@ public class SendOtp {
 	//public  static final long OTP_VALIDATION_TIME=5*60*1000;
 	
 	
-	private  static  LocalDateTime otpReqestTime;
+	private    LocalDateTime otpRequestTime;
 	
 	@CreationTimestamp
 	public  Timestamp creationTime;
@@ -42,19 +42,32 @@ public class SendOtp {
 
 	
 	
-	
+		
 
-	
 
-	
 
-	public static LocalDateTime getOtpReqestTime() {
-		return otpReqestTime;
+	public SendOtp(int sendOtpid, int otp, String email, long moblie, LocalDateTime otpRequestTime,
+			Timestamp creationTime, Timestamp updationTime) {
+		super();
+		this.sendOtpid = sendOtpid;
+		this.otp = otp;
+		this.email = email;
+		this.moblie = moblie;
+		this.otpRequestTime = otpRequestTime;
+		this.creationTime = creationTime;
+		this.updationTime = updationTime;
 	}
 
-	public static void setOtpReqestTime(LocalDateTime otpReqestTime) {
-		SendOtp.otpReqestTime = otpReqestTime;
+
+	public LocalDateTime getOtpRequestTime() {
+		return otpRequestTime;
 	}
+
+
+	public void setOtpRequestTime(LocalDateTime otpRequestTime) {
+		this.otpRequestTime = otpRequestTime;
+	}
+
 
 	public int getSendOtpid() {
 		return sendOtpid;

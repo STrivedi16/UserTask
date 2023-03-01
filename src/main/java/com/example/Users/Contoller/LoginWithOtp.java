@@ -84,17 +84,21 @@ public class LoginWithOtp {
 				
 				Users users=this.repository.findByEmailIgnoreCase(email);
 				
-				System.out.println();
+				System.out.println("ajsdajhdalksdhlaksdhalskdhas");
 					
 				UserDetails details=this.customerUserDetailsService.loadUserByUsername(email);
 				
 				String accessToken=this.jwtTokenUtil.generateToken(details);
 				
+				System.out.println("adjaskljdaldkaj");
 				
 				String refreshtoken=this.jwtRefreshToken.generatereftoken(details);
 				
-				this.otpService.clearOtp(dto.getEmail(), dto.getOtp());
+				System.out.println("adnasdasldadadaldk;dlakd;alskda;");
 				
+				this.otpService.clearOtp(dto.getEmail(), dto.getOtp());
+					
+				System.out.println("-------------------");
 				return new ResponseEntity<>(new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, accessToken, refreshtoken),HttpStatus.OK);
 				
 			}

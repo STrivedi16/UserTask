@@ -31,11 +31,5 @@ public class Testing {
 		return "Welcome to this applicaion ";
 	}
 	
-	@GetMapping("/generatePdf.html")
-	public String teat(Model model)
-	{
-		
-		return this.service.generateHtml();
-		
-	}
+
 }

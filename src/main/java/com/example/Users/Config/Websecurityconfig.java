@@ -34,10 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			,"/mobile",
 			"/registerOtp",
 			"/generatetoken",
-			
+			"/new",
 			"/userTaskPdf/{id}",
 			"/templates/generatePdf",
 			"/generatePdf.html",
+			"/sendOtp",
 		
 			"/templates/generatePdf.html"
 
