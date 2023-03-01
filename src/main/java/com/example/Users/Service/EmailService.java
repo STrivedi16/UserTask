@@ -36,7 +36,7 @@ public class EmailService {
 	{
 		boolean f= false;
 		
-		String from="shubhamtrivedi@nimapinfotech.com";
+		String from="email";
 		
 		
 		
@@ -61,7 +61,7 @@ public class EmailService {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				
 				
-				return  new  PasswordAuthentication("shubhamtrivedi@nimapinfotech.com", "shubhamT2711$");
+				return  new  PasswordAuthentication("username", "password");
 			}
 	
 			

@@ -46,28 +46,19 @@
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf-itext5 -->
-<dependency>
+<!-- <dependency>
     <groupId>org.xhtmlrenderer</groupId>
     <artifactId>flying-saucer-pdf-itext5</artifactId>
     <version>9.0.1</version>
 </dependency>
-
+-->
 <dependency>
   <groupId>com.twilio.sdk</groupId>
   <artifactId>twilio</artifactId>
   <version>8.1.0</version>
 </dependency>
 
-<dependency>
-   <groupId>com.lowagie</groupId>
-   <artifactId>itext</artifactId>
-   <version>2.1.7</version>
-  </dependency>
-  <dependency>
-   <groupId>com.itextpdf</groupId>
-   <artifactId>itext-asian</artifactId>
-   <version>5.2.0</version>
-  </dependency>
+
 
 
 <dependency>
@@ -77,12 +68,12 @@
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-<dependency>
+<!-- <dependency>
     <groupId>org.jsoup</groupId>
     <artifactId>jsoup</artifactId>
     <version>1.15.4</version>
 </dependency>
-
+-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -138,12 +129,13 @@
     <optional>true</optional>
 </dependency>
 		
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+</dependency>
+
 		
 		<dependency>
     <groupId>org.apache.poi</groupId>

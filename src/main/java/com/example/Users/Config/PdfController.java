@@ -14,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Service.PdfService;
+
 
 @RestController
 public class PdfController {
@@ -24,6 +27,12 @@ public class PdfController {
 	
 	@Autowired
 	private PdfService pdfService;
+	
+	@Autowired
+	private SpringTemplateEngine engine;
+	
+	@Autowired
+	private DataMapper dataMapper;
 	
 	@GetMapping("/generatePdf")
 	public ResponseEntity<?> generatePdf()
@@ -54,33 +63,48 @@ public class PdfController {
 		}
 	}
 	
-	@GetMapping("/genrate")
-	public void generate( Model model, HttpServletResponse httpServletResponse)
+//	@GetMapping("/genrate")
+//	public void generate( Model model, HttpServletResponse httpServletResponse)
+//	{
+//		try {
+//			
+//			
+//			
+//			model.addAttribute("image","classpath:/templates/smt-logo.jpg");
+//			model.addAttribute("name", "Shubham Trivedi");
+//			model.addAttribute("task", "Making crud of application ");
+//			model.addAttribute("status", "IN_PROCESS");
+//			
+//			
+//			System.out.println("pdf generated");
+//			
+//			String html=this.pdfService.readHtml(model);
+//			
+//			System.err.println("pdf generatedadadjasdasdadiladjasildjasdliajaildj");
+//		this.pdfService.generatePdf();
+//		
+//			
+//			
+//			
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
+	@GetMapping("/generate/{id}")
+	public void generateDoc(@PathVariable("id") int id )
 	{
-		try {
-			
-			
-			
-			model.addAttribute("image","classpath:/templates/smt-logo.jpg");
-			model.addAttribute("name", "Shubham Trivedi");
-			model.addAttribute("task", "Making crud of application ");
-			model.addAttribute("status", "IN_PROCESS");
-			
-			
-			System.out.println("pdf generated");
-			
-			String html=this.pdfService.readHtml(model);
-			
-			System.err.println("pdf generatedadadjasdasdadiladjasildjasdliajaildj");
-		this.pdfService.generatePdf();
+		String finalhtml=null;
 		
-			
-			
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		Context context=dataMapper.setData(id);
+		
+		finalhtml=engine.process("generatePdf", context);
+		 
+		this.pdfService.generateNewPdf(finalhtml);
+		
+		
 	}
 	
 }

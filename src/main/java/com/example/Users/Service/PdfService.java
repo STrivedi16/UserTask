@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.GroupLayout.Alignment;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.jsoup.Jsoup;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,14 +24,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.xhtmlrenderer.layout.SharedContext;
-import org.xhtmlrenderer.pdf.ITextRenderer;
+
 
 import com.example.Users.Interface.UsersTask;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.entity.Status;
 import com.example.Users.entity.UsersTaskEntity;
-import com.itextpdf.text.DocumentException;
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.html2pdf.resolver.font.DefaultFontProvider;
+
+
 import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
@@ -105,25 +108,25 @@ public class PdfService {
 //    }
 	
 	
-	public void generatePdf() throws IOException, DocumentException
-	{
-
-        File htmlFile = new File("/src/main/resources/generatePdf.html");
-        org.jsoup.nodes.Document doc = Jsoup.parse(htmlFile,"UTF-8");
-        doc.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml);
-        try (OutputStream os = new FileOutputStream("/src/main/java/com/example/Users/a.pdf")){
-        	ITextRenderer renderer = new ITextRenderer();
-        	SharedContext cntxt = renderer.getSharedContext();
-        	cntxt.setPrint(true);
-        	cntxt.setInteractive(false);
-        	String baseUrl = FileSystems.getDefault().getPath("/src/main/resources/generatePdf.html")
-        			         .toUri().toURL().toString();
-        	renderer.setDocumentFromString(doc.html(), baseUrl);
-        	renderer.layout();
-        	renderer.createPDF(os);
-        	System.out.println("done");
-        }
-	}
+//	public void generatePdf() throws IOException, DocumentException
+//	{
+//
+//        File htmlFile = new File("/src/main/resources/generatePdf.html");
+//        org.jsoup.nodes.Document doc = Jsoup.parse(htmlFile,"UTF-8");
+//        doc.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml);
+//        try (OutputStream os = new FileOutputStream("/src/main/java/com/example/Users/a.pdf")){
+//        	ITextRenderer renderer = new ITextRenderer();
+//        	SharedContext cntxt = renderer.getSharedContext();
+//        	cntxt.setPrint(true);
+//        	cntxt.setInteractive(false);
+//        	String baseUrl = FileSystems.getDefault().getPath("/src/main/resources/generatePdf.html")
+//        			         .toUri().toURL().toString();
+//        	renderer.setDocumentFromString(doc.html(), baseUrl);
+//        	renderer.layout();
+//        	renderer.createPDF(os);
+//        	System.out.println("done");
+//        }
+//	}
 	
 	
 	
@@ -314,10 +317,36 @@ public class PdfService {
 	}
 	
 	
-//	public void generateNewPdf(String html,int id, HttpServletResponse response)
-//	{
-//		
-//	}
+	public String generateNewPdf(String html)
+	{
+		ByteArrayOutputStream arrayOutputStream=new ByteArrayOutputStream();
+		
+			try {
+				
+				com.itextpdf.kernel.pdf.PdfWriter pdfWriter=new com.itextpdf.kernel.pdf.PdfWriter(arrayOutputStream);
+				
+				DefaultFontProvider defaultFontProvider=new DefaultFontProvider(false,true,false);
+				
+				ConverterProperties converterProperties=new ConverterProperties();
+				
+				converterProperties.setFontProvider(defaultFontProvider);
+				
+				HtmlConverter.convertToPdf(html, pdfWriter,converterProperties);
+				
+				FileOutputStream fout =new FileOutputStream("/Users/hp/Desktop/pdf/user.pdf");
+				
+				arrayOutputStream.writeTo(fout);
+				arrayOutputStream.close();
+				arrayOutputStream.flush();
+				
+				fout.close();
+				
+				return null;
+			}
+			catch (Exception e) {
+				return null;
+			}
+	}
 
 	
 }
