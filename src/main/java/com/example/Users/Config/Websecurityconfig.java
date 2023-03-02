@@ -24,7 +24,7 @@ import com.example.Users.Service.CustomerUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	public static final String[] PULIC_URL= {
-			"/register", "/token","/v3/api-docs"
+			"/register", "/Login","/v3/api-docs"
 			,"/v2/api-docs"
 			,"/swagger-resources/**",
 			"/swagger-ui/**",
@@ -87,4 +87,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+	
+//	 public Boolean comparePassword(String password, String hashPassword) {
+//
+//	        return passwordEncoder.matches(password, hashPassword);
+//
+//	    }
 }

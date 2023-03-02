@@ -38,7 +38,7 @@ public class JwtController {
 	@Autowired
 	private JwtRefreshToken jwtRefreshToken;
 
-	@RequestMapping(value = "/token", method = RequestMethod.POST)
+	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public ResponseEntity<?> generatetoken(@RequestBody JwtRequest jwtRequest) {
 		System.err.println(jwtRequest.getUsername());
 

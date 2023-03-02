@@ -101,6 +101,18 @@ public class UsersService {
 		return this.repository.findByID(id, UserTaskReview.class);
 	}
 	
+	
+	public Users updatePassword(int id, UserDto dto) throws Exception
+	{
+		Users users=this.repository.findById(id).orElseThrow(()-> new Exception("User not Found"));
+	
+		users.setPassword(dto.getPassword());
+		
+		return this.repository.save(users);
+			
+	
+	}
+	
 
 
 }

@@ -11,6 +11,9 @@ public class SuccessMessageConstant {
 	public static final String USER_TASK_SHOW = "user task fetched";
 	public static final String USER_TASK_ADD = "user task added";
 	public static final String RATING = "user task rated data fetched";
+	
+	public static final String PASSWORD_UPDATED="password has been updated successfully";
+			
 
 	public static final String LOGIN = "login successfull";
 

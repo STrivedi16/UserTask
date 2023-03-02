@@ -54,8 +54,13 @@ public class UserController {
 
 	JwtFilter filter = new JwtFilter();
 	
+	
+	
+	
 	@Autowired
 	private OtpService otpService;
+	
+	
 	
 	@Autowired
 	private TempUserDatabase database;
@@ -283,10 +288,10 @@ public class UserController {
 			
 		
 			
-//			Date date = new Date();
-//			Timestamp ts = new Timestamp(date.getTime());
+			Date date = new Date();
+			Timestamp ts = new Timestamp(date.getTime());
 			
-			if(otpService.isOtpExpired(LocalDateTime.now())==false)
+			if(ts.compareTo(otp.getOtpRequestTime())==-1)
 			{
 
 				if(otp==null)
@@ -325,6 +330,19 @@ public class UserController {
 		otpService.clearOtp(dto.getEmail(), dto.getOtp());
 		}
 
+	}
+	
+	
+	public ResponseEntity<?> updatePassWord(@PathVariable("id") int id , @RequestBody  UserDto dto)
+	{
+		try {
+			Users users=this.service.updatePassword(id, dto);
+			
+			return new ResponseEntity<>(new SuccessFileMessage(SuccessMessageConstant.PASSWORD_UPDATED, SuccessMessageKey.USER_M031103),HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.PASSWORD_NOT_UPDATE, ErrorMessageKey.USER_E031102),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	

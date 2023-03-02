@@ -1,22 +1,19 @@
-//package com.example.Users.twilio;
+package com.example.Users.twilio;
+
+import java.util.Random;
 //
-//import java.util.Random;
 //
-//import org.springframework.beans.factory.annotation.Autowired;
+//
 //import org.springframework.stereotype.Service;
 //
 //import com.twilio.Twilio;
 //import com.twilio.rest.api.v2010.account.Message;
 //import com.twilio.type.PhoneNumber;
 //
-//
-//
-//
 //@Service
 //public class TwilioOtoService {
 //
-//	@Autowired
-//	private TwilioConfig config;
+//	
 //	
 //	  
 //	
@@ -30,43 +27,20 @@
 //		return otp;
 //	}
 //	
-//	PasswordResetResponceDto responceDto=null;
-//	
-//	public void sentOtp(PasswordResetDto dto)
-//	{
-//		
-//		// Twilio.init(config.getAccountSid(), config.getAuthToken());
-//		
-//		try {
-////		PhoneNumber to=new PhoneNumber(dto.getNumber());
-////		
-////		PhoneNumber from=new PhoneNumber(config.getTrialNumber());
-//		
-//		int otp=generateOtp();
-//		
-//		System.err.println("number get");
-//		
-//		String otpMessage="Dear Customer , Your otp is "+otp+" ues this to verify your Account";
-//		
-//		System.err.println("aadakdadka;dlaks;dl");
-//		
-//		Message message = Message.creator(
-//				
-//                new PhoneNumber(dto.getUserNumber()),
-//                new PhoneNumber(config.getTrialNumber()),
-//                otpMessage)
+//	private final String ACCOUNT_SID = "ACa68022a9760a0160eb5139a4ce9677a3";
+//    private final String AUTH_TOKEN = "df9dbb9ac776409360117fc3be3e79a8";
+//    private final String FROM_PHONE_NUMBER = "+12762623617";
+//    
+//    public void sendOtp(String toPhoneNumber) {
+//        int otp = generateOtp();
+//        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+//        Message message = Message.creator(
+//                new PhoneNumber(toPhoneNumber),
+//                new PhoneNumber(FROM_PHONE_NUMBER),
+//                "Your OTP is: " + otp)
 //            .create();
-//
-//        System.err.println(message.getSid());
-//		  
-//				}catch (Exception e) {
-//					
-//					e.printStackTrace();
-//					}
-//		
-//		
-//		
-//	}
+//        System.out.println("OTP sent: " + message.getSid());
+//    }
 //	
 ////	public Mono<String> validateOtp()
 ////	{

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Users.Config.PdfController;
 import com.example.Users.OTP.OtpService;
 import com.example.Users.Repository.UsersRepository;
 import com.example.Users.Responce.ErrorMessage;
@@ -31,6 +32,9 @@ public class EmailOtpController {
 	
 	@Autowired
 	private OtpService otpService;
+	
+	@Autowired
+	private PdfController controller;
 	
 	@Autowired
 	private UsersRepository usersRepository;
@@ -72,6 +76,10 @@ public class EmailOtpController {
 			{
 				return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.INVALID_EMAIL, ErrorMessageKey.USER_E031106),HttpStatus.BAD_REQUEST);
 			}
+			
+		
+			
+			
 			//OTP = "+otpService.newotp
 			String message="<h3>Hello "+ " "+users.getName() +"</h3><br>"+"<h2> OTP"+" "+otpService.newotp+"</h2> <br>"
 					+"<p><h6>this otp is for vrtification </h6></p>"

@@ -53,7 +53,8 @@ public class JwtFilter extends OncePerRequestFilter {
 		String type = null;
 
 		if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
-			jwttoken = requestHeader.substring(7);
+			//jwttoken = requestHeader.substring(7);
+			jwttoken = requestHeader.split(" ")[1].trim();
 
 			try {
 				type = this.jwtTokenUtil.getTypeFromToken(jwttoken);

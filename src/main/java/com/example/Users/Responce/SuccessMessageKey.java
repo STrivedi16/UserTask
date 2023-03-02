@@ -21,7 +21,9 @@ public class SuccessMessageKey {
 	public static final String LOGIN_M031100 = HEADER + USER + "00";// login
 	public static final String USER_M031101 = HEADER + USER + "01";// STORED
 	public static final String USER_M031102 = HEADER + USER + "02";// USER DETAILS FETCHED
-
+	public static final String USER_M031103=HEADER+USER+"03";// password updated 
+	
+	
 	public static final String USER_TASK_M031301 = HEADER + USER_TASK + "01";// USERTASK ASSIGN
 	public static final String USER_TASK_M031302 = HEADER + USER_TASK + "02";// USER TASK FETCHED
 

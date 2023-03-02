@@ -1,8 +1,10 @@
 package com.example.Users.OTP;
 
-import java.sql.Date;
+
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +32,7 @@ public class SendOtp {
 	//public  static final long OTP_VALIDATION_TIME=5*60*1000;
 	
 	
-	private    LocalDateTime otpRequestTime;
+	private  Timestamp  otpRequestTime;
 	
 	@CreationTimestamp
 	public  Timestamp creationTime;
@@ -39,15 +41,32 @@ public class SendOtp {
 	private Timestamp updationTime;
 
 	
+	
+	
+	
+
+	
 
 	
 	
-		
+
+	
+	public Timestamp getOtpRequestTime() {
+		return otpRequestTime;
+	}
 
 
 
-	public SendOtp(int sendOtpid, int otp, String email, long moblie, LocalDateTime otpRequestTime,
-			Timestamp creationTime, Timestamp updationTime) {
+
+	public void setOtpRequestTime(Timestamp otpRequestTime) {
+		this.otpRequestTime = otpRequestTime;
+	}
+
+
+
+
+	public SendOtp(int sendOtpid, int otp, String email, long moblie, Timestamp otpRequestTime, Timestamp creationTime,
+			Timestamp updationTime) {
 		super();
 		this.sendOtpid = sendOtpid;
 		this.otp = otp;
@@ -59,14 +78,6 @@ public class SendOtp {
 	}
 
 
-	public LocalDateTime getOtpRequestTime() {
-		return otpRequestTime;
-	}
-
-
-	public void setOtpRequestTime(LocalDateTime otpRequestTime) {
-		this.otpRequestTime = otpRequestTime;
-	}
 
 
 	public int getSendOtpid() {

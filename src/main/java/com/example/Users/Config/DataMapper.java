@@ -33,6 +33,7 @@ public class DataMapper {
 		String name = null;
 		String tasks=null;
 		Status status=null;
+		String image="/src/main/resoueces/smt-logo.jpg";
 		ArrayList<String> allTask=new ArrayList<>();
 		ArrayList<Status> statusTask=new ArrayList<>();
 		for(UsersTask newTask:task)
@@ -44,7 +45,10 @@ public class DataMapper {
 			statusTask.add(status);
 			
 		}
+		data.put("image",image);
 		data.put("name", name);
+
+		
 		Object forEachTask[]=allTask.toArray();
 		String eachTask[]=new String [forEachTask.length];
 	
@@ -63,16 +67,28 @@ public class DataMapper {
 		
 		String userTask=null;
 		String statusof=null;
+		List<String> al=new ArrayList<>();
+		List<String> al2=new ArrayList<>();
 		for(int i=0,j=0;i<eachTask.length||j<statusOfTask.length;i++,j++)
 		{
+			
+			userTask=null;;
 			 userTask=eachTask[i];
 			 statusof =" "+statusOfTask[i];
+			al.add(userTask);
+			al2.add(statusof);
+			
 			
 			
 		}
-		data.put("task", userTask);
-		data.put("status", statusof);
 		
+		 System.out.println(al);
+		 System.out.println();
+		
+		 data.put("task",userTask );
+			data.put("status", statusof);
+			data.put("task",userTask );
+			data.put("status", statusof);
 		context.setVariables(data);
 		
 		return context;

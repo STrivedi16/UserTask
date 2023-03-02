@@ -6,11 +6,12 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.http.HttpResponse;
-import java.sql.Date;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class OtpService {
 	public static int newotp=OtpService.generateOtp();
 	
 //	public static long currentTimeMillis=System.currentTimeMillis();
-	public  static final long OTP_VALIDATION_TIME=5;
+	public  static final long OTP_VALIDATION_TIME=5*60*1000;
 //	public static Date otpRequestedTimeMillis=S;
 //	public static long otpReqTime=otpRequestedTimeMillis.getTime();
 //	
@@ -67,9 +68,16 @@ public class OtpService {
 		SendOtp sendOtp=this.otpRepository.findByEmailIgnoreCase(email);
 		
 		
-		LocalDateTime expirationtime=LocalDateTime.now().plus(OTP_VALIDATION_TIME,ChronoUnit.MINUTES);
+		//LocalDateTime expirationtime=LocalDateTime.now().plus(OTP_VALIDATION_TIME,ChronoUnit.MINUTES);
 		
-		System.err.println(expirationtime);
+		
+		//Date expirationtime=new Date(OTP_VALIDATION_TIME+new java.util.Date().getMinutes());
+		
+//		Calendar calender = Calendar.getInstance();
+//		calender.add(Calendar.MINUTE, 5);
+		Date date = new Date();
+		Timestamp ts = new Timestamp(date.getTime()+OTP_VALIDATION_TIME);
+		System.err.println("Generation time"+ts);
 		
 		if(sendOtp !=null)
 		{
@@ -78,7 +86,7 @@ public class OtpService {
 		otp.setEmail(sendOtp.getEmail());
 		otp.setOtp(newotp);
 		
-		otp.setOtpRequestTime(expirationtime);
+		otp.setOtpRequestTime(ts);
 		
 		
 		return this.otpRepository.save(otp);
@@ -90,16 +98,16 @@ public class OtpService {
 			otp.setEmail(email);
 			otp.setOtp(newotp);
 			
-			otp.setOtpRequestTime(expirationtime);
+			otp.setOtpRequestTime(ts);
 			
 			
 			return this.otpRepository.save(otp);
 		}
 	}
 	
-	public boolean isOtpExpired(LocalDateTime expirationTime) {
-        return LocalDateTime.now().isAfter(expirationTime);
-    }
+//	public boolean isOtpExpired(Date expirationTime) {
+//        if(c)
+//    }
 	
 	public SendOtp clearOtp(String email, int otp)
 	{
@@ -127,8 +135,7 @@ public class OtpService {
 		
 		SendOtp otp2=this.otpRepository.findByEmailIgnoreCaseAndOtp(email, otp);
 		
-		System.err.println("addmslidmadlamdalddkmldkamsldkmasldkasldkasmdkmasd");
-		
+				
 		if(otp2==null)
 		{
 			throw new Exception("not valid otp");

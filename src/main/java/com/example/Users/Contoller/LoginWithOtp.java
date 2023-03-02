@@ -34,6 +34,9 @@ public class LoginWithOtp {
 	@Autowired
 	private OtpService otpService;
 	
+//	@Autowired
+//	private SendOtp sendOtp;
+	
 	//@Autowired
 //	private JwtController controller;
 	
@@ -51,6 +54,9 @@ public class LoginWithOtp {
 	private CustomerUserDetailsService customerUserDetailsService;
 	
 	
+	SendOtp sendOtp=new SendOtp();
+	
+	
 	@PostMapping("/loginwithOTP")
 	public ResponseEntity<?> loginWithOtp(@RequestBody LoginOtpDto dto)
 	{
@@ -66,9 +72,15 @@ public class LoginWithOtp {
 //			Date date = new Date();
 //			Timestamp ts = new Timestamp(date.getTime());
 			
+			Date date = new Date();
+			Timestamp ts = new Timestamp(date.getTime());
+			
+			System.err.println("Current time"+ts);
+			System.err.println("Otp generating time"+otp.getOtpRequestTime());
+			
 //			java.sql.Date date=new java.sql.Date(System.currentTimeMillis());
 			
-			if(otpService.isOtpExpired(LocalDateTime.now())==false)
+			if( ts.compareTo(otp.getOtpRequestTime())==-1)
 			{
 				
 				

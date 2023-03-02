@@ -17,6 +17,7 @@ public class ErrorMessageConstant {
 	public static final String INVALID_EMAIL = "invalid email";
 	public static final String NOT_STORED = "not stored or all ready stored";
 	public static final String DETAILS_INCOPLETE = " some details are incomplete";
+	public static final String PASSWORD_NOT_UPDATE="invalid password or not updated";
 
 	// ALL USER TASK MESSAGE
 	public static final String USER_TASK_NOT_FOUND = "task assign to user is not found";
