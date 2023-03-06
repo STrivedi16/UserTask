@@ -1,7 +1,12 @@
 package com.example.Users.Contoller;
 
+import java.io.ByteArrayInputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.Users.FileHandle.FileEntity;
 import com.example.Users.FileHandle.FileHandleHelper;
 import com.example.Users.FileHandle.FileService;
 import com.example.Users.Responce.ErrorMessage;
 import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
+import com.example.Users.Responce.SuccessFileMessage;
 import com.example.Users.Responce.SuccessMessageConstant;
 
 @RestController
@@ -44,8 +49,10 @@ public class FileUpload {
 			}
 
 			Boolean f = this.fileHandleHelper.uploadFile(file);
-			String upload=this.fileService.uploadFile(file);
+			//String upload=this.fileService.uploadFile(file);
 
+			String upload=this.fileService.uploadVideo(file);
+			
 			if (f == true || upload.isEmpty()==false) {
 
 //				return new ResponseEntity<>(new Success("Success", "Success", ServletUriComponentsBuilder
@@ -70,11 +77,41 @@ public class FileUpload {
 	public ResponseEntity<?> downloadfile(@PathVariable("id") int id) {
 		try {
 		
-			byte[] imagedata = this.fileService.downloadfile(id);
-			
-			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(new ByteArrayResource(imagedata));
+			byte[] imagedata = this.fileService.getImage(id);
+			System.out.println(imagedata);
+			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.IMAGE_JPEG).body(new ByteArrayResource(imagedata));
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_FOUND, ErrorMessageKey.FILE_E032001), HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/video/{id}")
+	public ResponseEntity<?> getVideo(@PathVariable("id") int id )
+	{
+		try {
+			byte[] video=this.fileService.getVideo(id);
+			System.out.println(video);
+			
+				
+			
+			InputStreamResource inputStreamResource= new InputStreamResource(new ByteArrayInputStream(video));
+			
+			HttpHeaders headers=new HttpHeaders();
+			
+			headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			headers.add(HttpHeaders.CONTENT_DISPOSITION,   "attachment; filename=\"video.mp4\"");
+			headers.add(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate");
+			headers.add(HttpHeaders.PRAGMA,  "no-cache");
+			headers.add(HttpHeaders.EXPIRES, "0");
+			
+			return ResponseEntity.ok().headers(headers).contentLength(video.length).body(inputStreamResource);
+		
+		
+		}
+		
+		
+		catch (Exception e) {
+						return new ResponseEntity<>(new ErrorMessage("Video not get", "Video not get"),HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -92,4 +129,45 @@ public class FileUpload {
 //
 //		}
 //	}
+	
+	@PostMapping("/uploadfiles")
+	public ResponseEntity<?> uploadMultipleFile(@RequestParam("files") MultipartFile[] files)
+	{
+		try {
+			
+			String list=this.fileService.uploadMultiFile(files);
+			
+			return new ResponseEntity<>(new SuccessFileMessage(SuccessMessageConstant.FILE_UPLOAD, list),HttpStatus.OK);
+			
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_UPLOADED, ErrorMessageKey.FILE_E032001), HttpStatus.BAD_REQUEST);
+
+		}
+	}
+	
+	@GetMapping("/multiplefiles")
+	public ResponseEntity<?> getMultipleFile()
+	{
+		try {
+			
+			
+		
+			byte[] bs=this.fileService.getMultipleFile();
+			HttpHeaders  headers=new HttpHeaders();
+			
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.setContentDisposition(ContentDisposition.builder("attachment").filename("files.zip").build());
+			
+			
+			
+			return new ResponseEntity<>(bs,headers,HttpStatus.OK);
+		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new ErrorMessage(ErrorMessageConstant.FILE_NOT_FOUND, ErrorMessageKey.FILE_E032001),HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }
