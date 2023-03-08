@@ -61,6 +61,9 @@ public class Users implements UserDetails {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users1")
 	@JsonIgnore
 	private List<QueryPortal> qury;
+	
+	
+	//List<Contect> contects;
 
 	public boolean isIs_active() {
 		return is_active;
@@ -143,7 +146,7 @@ public class Users implements UserDetails {
 		this.city = city;
 		this.email = email;
 		this.password = password;
-		Creationtime = creationtime;
+		this.Creationtime = creationtime;
 		this.updationtime = updationtime;
 		this.is_active = is_active;
 		this.task = task;
