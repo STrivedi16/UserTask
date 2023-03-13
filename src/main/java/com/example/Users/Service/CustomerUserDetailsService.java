@@ -40,6 +40,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 
+		System.out.println(username);
 		
 		ArrayList<SimpleGrantedAuthority> permissions = null;
 		

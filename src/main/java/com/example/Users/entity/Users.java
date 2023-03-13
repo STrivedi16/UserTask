@@ -224,11 +224,21 @@ public class Users implements UserDetails {
 		return true;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Users [name=" + name + ", add=" + add + ", city=" + city + ", email=" + email + ", password=" + password
+//				  + "]";
+//	}
+
 	@Override
     public String toString() {
         return "{\"id\":" + id + ",\"name\":\"" + name + "\",\"email\":\"" + email + "\",\"password\":\"" + password
                 + "\"}";
     }
+	
+	
+	
+	
 	
 	
 	

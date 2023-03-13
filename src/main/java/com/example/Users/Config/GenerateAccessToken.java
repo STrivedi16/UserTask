@@ -31,7 +31,7 @@ public class GenerateAccessToken {
 
 	@GetMapping("/generatetoken")
 	public ResponseEntity<?> GeneratenewToken(
-			@RequestParam(name = "RefreshToken", defaultValue = "", required = false) String reftoken)
+			@RequestParam(name = "RefreshToken", required = false) String reftoken)
 			throws Exception {
 		System.out.println(reftoken);
 
