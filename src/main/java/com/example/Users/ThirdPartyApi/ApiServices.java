@@ -6,6 +6,7 @@ import org.patriques.AlphaVantageConnector;
 import org.patriques.TimeSeries;
 import org.patriques.output.AlphaVantageException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,7 +28,8 @@ public class ApiServices {
 //		
 //	}
 
-		
+	@Autowired
+	private RestTemplate restTemplate;	
 	//String url="https://ntts.nimapinfotech.com/apps/myTopic";
 	
 	public String getApi()
@@ -56,6 +58,18 @@ public class ApiServices {
 		return restTemplate.getForObject(url, String.class);
 		
 		
+	}
+	
+	
+	public String getNasaApi()
+	{
+		String apiKey="YPq7PScD6LbDRfdE2nsohaCHuoNSApNl1AnTU99j";
+		
+		String url="https://api.nasa.gov/planetary/earth/assets?lon=-95.33&lat=29.78&date=2018-01-01&&dim=0.10&api_key="+apiKey;
+	
+		String result=this.restTemplate.getForObject(url, String.class);
+		
+		return result;
 	}
 	
 //	public Double getStockPrice(String symbol) throws AlphaVantageException {

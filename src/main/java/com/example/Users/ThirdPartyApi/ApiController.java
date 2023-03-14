@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Users.Responce.ErrorMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
@@ -18,7 +19,7 @@ public class ApiController {
 	private ApiServices apiServices;
 	
 	@GetMapping("/ntts/task")
-	public ResponseEntity<?> getapi()
+	public ResponseEntity<?> getApi()
 	{
 		try {
 		
@@ -49,6 +50,20 @@ public class ApiController {
 		catch (Exception e) {
 			
 			return new ResponseEntity<>("not found",HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/nasa")
+	public ResponseEntity<?> getNasaApi()
+	{
+		try {
+			
+			String api=this.apiServices.getNasaApi();
+			
+			return new ResponseEntity<>(api,HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(new ErrorMessage("Api is not valid", "Api not get"),HttpStatus.BAD_REQUEST);
 		}
 	}
 	
