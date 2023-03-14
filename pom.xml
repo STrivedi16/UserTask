@@ -50,6 +50,26 @@
     <version>3.4.0</version>
 </dependency>
 
+
+<!-- https://mvnrepository.com/artifact/com.github.prominence/openweathermap-api -->
+<dependency>
+    <groupId>com.github.prominence</groupId>
+    <artifactId>openweathermap-api</artifactId>
+    <version>2.3.0</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/io.github.mainstringargs/alpha-vantage-scraper -->
+<dependency>
+    <groupId>io.github.mainstringargs</groupId>
+    <artifactId>alpha-vantage-scraper</artifactId>
+    <version>1.0</version>
+</dependency>
+
+
+
+
+
 <dependency>
     <groupId>org.apache.httpcomponents</groupId>
     <artifactId>httpclient</artifactId>
