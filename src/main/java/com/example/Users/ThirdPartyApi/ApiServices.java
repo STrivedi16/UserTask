@@ -1,7 +1,13 @@
 package com.example.Users.ThirdPartyApi;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 
+import org.apache.http.HttpConnection;
 import org.patriques.AlphaVantageConnector;
 import org.patriques.TimeSeries;
 import org.patriques.output.AlphaVantageException;
@@ -11,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.lettuce.core.dynamic.annotation.CommandNaming;
@@ -32,13 +39,14 @@ public class ApiServices {
 	private RestTemplate restTemplate;	
 	//String url="https://ntts.nimapinfotech.com/apps/myTopic";
 	
-	public String getApi()
+	public String getApi(String email, String password)
 	{
-		String url="https://ntts.nimapinfotech.com/apps/myTopic";
-		
+		String url="https://ntts.nimapinfotech.com/auth/login?Email ID="+email+"&Password="+password;
+ 		
 		RestTemplate restTemplate=new  RestTemplate();
 		
 		String result=restTemplate.getForObject(url, String.class);
+		
 		
 		return result;
 	}
@@ -80,7 +88,28 @@ public class ApiServices {
 	
 	
 	
-	
+	public String getQuotes(String category) throws IOException
+	{
+//		URL url=new URL("https://api.api-ninjas.com/v1/quotes?category="+category);
+//		HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+//		connection.setRequestProperty("accept", "application/json");
+//		InputStream inputStream=connection.getInputStream();
+//		ObjectMapper mapper=new ObjectMapper();
+//		JsonNode root=mapper.readTree(inputStream);
+//		
+//		return root.path("fact").asText();
+		
+		String url="https://api.api-ninjas.com/v1/quotes?category="+category;
+		
+		RestTemplate restTemplate=new RestTemplate();
+		
+		String result= restTemplate.getForObject(url, String.class);
+		
+		System.out.println(result);
+		
+		return result;
+		
+	}
 	
 	
 	

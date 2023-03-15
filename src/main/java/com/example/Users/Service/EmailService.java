@@ -61,7 +61,7 @@ public class EmailService {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				
 				
-				return  new  PasswordAuthentication("shubhamtrivedi@nimapinfotech.com", "shubhamT2711$");
+				return  new  PasswordAuthentication("shubhamtrivedi@nimapinfotech.com", "password");
 			}
 	
 			

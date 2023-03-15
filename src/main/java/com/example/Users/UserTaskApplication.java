@@ -1,6 +1,8 @@
 package com.example.Users;
 
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +33,11 @@ public class UserTaskApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public HttpClient httpClient() {
+	  return HttpClientBuilder.create().build();
 	}
 
 }
