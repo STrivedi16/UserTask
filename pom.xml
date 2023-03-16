@@ -36,6 +36,14 @@
 	
 	
 	
+	<!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-clients</artifactId>
+    <version>3.4.0</version>
+</dependency>
+
+	
 	
 	<!-- this dependancy is for qrcode-->
 <dependency>

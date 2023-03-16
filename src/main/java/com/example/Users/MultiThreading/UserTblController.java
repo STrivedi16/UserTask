@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.Users.Responce.ErrorMessage;
+
 @RestController
 public class UserTblController {
 
@@ -20,18 +22,27 @@ public class UserTblController {
 	private UserTblService service;
 	
 	@PostMapping(value = "/userTbl",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE},produces = "application/json")
-	public ResponseEntity<?> saveUser(@RequestParam("files") MultipartFile files) throws Exception
+	public ResponseEntity<?> saveUser(@RequestParam("files") MultipartFile files) 
 	{
 		System.err.println(files);
 //		 for(MultipartFile file: files)
 //		 {
 			 System.err.println("files data get");
-			 this.service.saveUser(files);
+			 try {
+				this.service.saveUser(files);
+				
+				return ResponseEntity.status(HttpStatus.CREATED).build();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				return new ResponseEntity<>(new ErrorMessage("Csv Not stored", "Csv not stored"),HttpStatus.BAD_REQUEST);
+			}
 			 
 			 
 			 
 		 //}
-		 return ResponseEntity.status(HttpStatus.CREATED).build();
+		 
 	}
 	
 	@GetMapping(value = "/get",produces = "application/json")
