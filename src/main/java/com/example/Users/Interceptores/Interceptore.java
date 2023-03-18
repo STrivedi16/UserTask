@@ -1,12 +1,14 @@
 package com.example.Users.Interceptores;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -36,6 +38,11 @@ public class Interceptore implements HandlerInterceptor {
 	@Autowired
 	private RedisService redisService;
 
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
+	
+	public String topic ="my-topic";
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -87,6 +94,8 @@ public class Interceptore implements HandlerInterceptor {
 			}
 			
 			request.setAttribute("permission ", permission);
+			
+			this.kafkaTemplate.send(topic, username+" "+request.getRequestURL()+" "+new Date(System.currentTimeMillis()));
 		}
 
 //		String username = request.getParameter("username");

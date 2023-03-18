@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,8 @@ import com.example.Users.Responce.ErrorMessageConstant;
 import com.example.Users.Responce.ErrorMessageKey;
 import com.example.Users.Service.CustomerUserDetailsService;
 import com.example.Users.entity.Users;
+
+import io.netty.util.internal.ObjectCleaner;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -40,6 +43,9 @@ public class JwtFilter extends OncePerRequestFilter {
 	public static int id = 0;
 	
 	Logger LOG=LoggerFactory.getLogger(JwtFilter.class);
+	
+	
+	
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -97,6 +103,8 @@ public class JwtFilter extends OncePerRequestFilter {
 			// that the current user is authenticated. So it passes the
 			// Spring Security Configurations successfully.
 			SecurityContextHolder.getContext().setAuthentication(upat);
+			
+			
 
 		} else {
 			LOG.info("user not valid");
