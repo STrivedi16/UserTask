@@ -1,8 +1,11 @@
 package com.example.Users.Contoller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +40,11 @@ public class JwtController {
 
 	@Autowired
 	private JwtRefreshToken jwtRefreshToken;
+	
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
+	
+	public String topic ="my-topic";
 
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public ResponseEntity<?> generatetoken(@RequestBody JwtRequest jwtRequest) {
@@ -87,6 +95,8 @@ public class JwtController {
 //
 //		System.out.println(reftoken);
 
+		this.kafkaTemplate.send(topic,details.getUsername()+" login Sucessfull at "+new Date(System.currentTimeMillis()));
+		
 		return new ResponseEntity<>(
 				new SuccessMessageToken(SuccessMessageConstant.LOGIN, SuccessMessageKey.LOGIN_M031100, token, reftoken),
 				HttpStatus.OK);
